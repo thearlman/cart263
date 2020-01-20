@@ -3,6 +3,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   width: 100%;
   height:100vh;
   justify-content: center;
@@ -20,7 +21,51 @@ body {
 }
 
 .pixel{
+  transform: rotate(0deg);
   background: white;
   width: 100%;
   height: 100%;
+}
+
+#buttonWrapper{
+  min-width: 75vh;
+  height: 5vh;
+  border: solid 1px green;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: .5vh;
+}
+
+#red{
+  background: rgb(255,0,0);
+}
+#green{
+  background: rgb(0,255,0);
+}
+#blue{
+  background: rgb(0,0,255);
+}
+#black{
+  background: rgb(0,0,0);
+}
+#erase{
+  background: rgb(255,255,255);
+  border: solid .1vh black;
+}
+.buttons{
+  box-shadow: .25vh .25vh grey;
+  margin: .25vh;
+  width:10%;
+  height: 100%
+}
+
+.buttons:hover{
+  width:10.5%;
+  height:105%;
+}
+
+.buttons:active{
+  width: 9%;
+  height: 90%;
 }
