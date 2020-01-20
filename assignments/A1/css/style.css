@@ -2,13 +2,25 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height:100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#canvas{
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  min-width: 75vh;
+  height: 75vh;
+  border: solid 1px green;
+
 }
 
 .pixel{
-  /* margin: .1vh; */
-  background: black;
-  width: 30px;
-  height: 30px;
-  float: left;
-  /* display: inline-block; */
+  background: white;
+  width: 100%;
+  height: 100%;
 }
