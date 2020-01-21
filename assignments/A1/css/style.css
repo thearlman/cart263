@@ -8,6 +8,7 @@ body {
   height:100vh;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 #canvas{

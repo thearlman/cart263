@@ -18,14 +18,14 @@
   <body>
     <div id="canvas"></div>
     <div id="buttonWrapper">
-      <div id="rainbow" class="buttons" onclick="currentColor = 'rainbow';"></div>
-      <div id="red" class="buttons" onclick="currentColor = 'red';"></div>
-      <div id="green" class="buttons" onclick="currentColor = 'green';"></div>
-      <div id="blue" class="buttons" onclick="currentColor = 'blue';"></div>
-      <div id="black" class="buttons" onclick="currentColor = 'black';"></div>
-      <div id="brown" class="buttons" onclick="currentColor = 'brown';"></div>
-      <div id="pink" class="buttons" onclick="currentColor = 'pink';"></div>
-      <div id="erase" class="buttons" onclick="currentColor = 'eraser';"></div>
+      <div id="rainbow" class="buttons" onclick="currentColor = colors.rainbow;"></div>
+      <div id="red" class="buttons" onclick="currentColor = colors.red;"></div>
+      <div id="green" class="buttons" onclick="currentColor = colors['green'];"></div>
+      <div id="blue" class="buttons" onclick="currentColor = colors['blue'];"></div>
+      <div id="black" class="buttons" onclick="currentColor = colors['black'];"></div>
+      <div id="brown" class="buttons" onclick="currentColor = colors['brown'];"></div>
+      <div id="pink" class="buttons" onclick="currentColor = colors['pink'];"></div>
+      <div id="erase" class="buttons" onclick="currentColor = colors['eraser'];"></div>
       <div id="reset" class="buttons" onclick="reset();"></div>
 
 

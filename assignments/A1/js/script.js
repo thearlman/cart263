@@ -1,10 +1,5 @@
 "use strict";
 
-//the current color user is painting with
-let currentColor = 'rainbow';
-
-let rotation = 0;
-
 //~~~~~~~~$()~~~~~~~~~
 //
 //returns an element on the pagee, according to the id it was fed
@@ -13,33 +8,37 @@ function $(id) {
   return document.getElementById(id);
 }
 
+//current rotation
+let rotation = 0;
+
 //key-values for all the colors available.
 let colors = {
-  rainbow: function(color){return Math.floor(Math.random() * 255)},
-  red: `rgb(255, 0, 0)`,
-  green: `rgb(0, 255, 0)`,
-  blue: 'rgb(0, 0, 255)',
-  black: 'rgb(0, 0, 0)',
-  brown: 'rgb(150, 75, 0)',
-  pink: 'rgba(255, 0, 144)',
-  eraser: 'rgb(255, 255, 255)'
+  rainbow: ()=>{
+    return `rgb(${Math.floor(Math.random() * 255)},
+    ${Math.floor(Math.random() * 255)},
+    ${Math.floor(Math.random() * 255)})`;
+    },
+  red: ()=>{return `rgb(255, 0, 0)`},
+  green: ()=>{return `rgb(0, 255, 0)`},
+  blue: ()=>{return 'rgb(0, 0, 255)'},
+  black: ()=>{return 'rgb(0, 0, 0)'},
+  brown: ()=>{return 'rgb(150, 75, 0)'},
+  pink: ()=>{return 'rgba(255, 0, 144)'},
+  eraser: ()=>{return 'rgb(255, 255, 255)'}
 };
+
+//the current color user is painting with
+let currentColor = colors['black'];
 
 //~~~~~colorPicker()~~~~~~~
 //
 //picks a random number between 0 and 255 and returns it.
 function randomColorPicker() {
-  return 'Hello';
-  //return Math.floor(Math.random() * 255);
+  return `rgb(${Math.floor(Math.random() * 255)},
+  ${Math.floor(Math.random() * 255)},
+  ${Math.floor(Math.random() * 255)})`;
 }
 
-//~~~~~~setColor()~~~~~~
-//
-//sets the color of the pixel it was passed
-function setColor(pixel, color) {
-  pixel.style.background = color;
-  console.log(color);
-}
 
 //wait for the window object to load before creating canvas
 window.onload = () => {
@@ -65,10 +64,11 @@ window.onload = () => {
       for (let i = 0; i < canvas.childNodes.length; i++) {
         let pixel = canvas.childNodes[i];
         pixel.onmouseover = () => {
-          setColor(pixel, colors[currentColor]);
+        pixel.style.background = currentColor();
         }
       }
     }
+
     //when user releases the mouse, remove the event handler
     canvas.onmouseup = () => {
       for (let i = 0; i < canvas.childNodes.length; i++) {
@@ -77,6 +77,7 @@ window.onload = () => {
       }
     }
   }
+
   // lets make a canvas!
   makeCanvas();
   //create an eventlistener to check for key press events
@@ -85,10 +86,10 @@ window.onload = () => {
   function keyHandler(keyEvent) {
     if (keyEvent.key === "ArrowLeft") {
       rotation -= 10;
-      console.log(rotation);
+
     } else if (keyEvent.key === "ArrowRight") {
       rotation += 10;
-      console.log(rotation);
+
     }
     for (let i = 0; i < $("canvas").childNodes.length; i++) {
       $("canvas").childNodes[i].style.transform = `rotate(${rotation}deg)`;
@@ -101,7 +102,7 @@ window.onload = () => {
 // reset the canvas to white
 function reset() {
   for (let i = 0; i < $("canvas").childNodes.length; i++) {
-    $("canvas").childNodes[i].style.background = colors["eraser"];
+    $("canvas").childNodes[i].style.background = colors["eraser"]();
   }
 }
 
