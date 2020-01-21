@@ -16,16 +16,18 @@
   </head>
 
   <body>
-    <div id="canvas">
-
-    </div>
+    <div id="canvas"></div>
     <div id="buttonWrapper">
-      <div>COLORS:</div>
+      <div id="rainbow" class="buttons" onclick="currentColor = 'rainbow';"></div>
       <div id="red" class="buttons" onclick="currentColor = 'red';"></div>
       <div id="green" class="buttons" onclick="currentColor = 'green';"></div>
       <div id="blue" class="buttons" onclick="currentColor = 'blue';"></div>
       <div id="black" class="buttons" onclick="currentColor = 'black';"></div>
+      <div id="brown" class="buttons" onclick="currentColor = 'brown';"></div>
+      <div id="pink" class="buttons" onclick="currentColor = 'pink';"></div>
       <div id="erase" class="buttons" onclick="currentColor = 'eraser';"></div>
+      <div id="reset" class="buttons" onclick="reset();"></div>
+
 
     </div>
   </body>

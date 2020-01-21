@@ -3,6 +3,8 @@
 //the current color user is painting with
 let currentColor = 'rainbow';
 
+let rotation = 0;
+
 //~~~~~~~~$()~~~~~~~~~
 //
 //returns an element on the pagee, according to the id it was fed
@@ -13,19 +15,22 @@ function $(id) {
 
 //key-values for all the colors available.
 let colors = {
-  rainbow : `rgb(${randomColorPicker()}, ${randomColorPicker()}, ${randomColorPicker()})`,
-  red : `rgb(255,0,0)`,
-  green : `rgb(0,255,0)`,
-  blue : 'rgb(0,0,255)',
-  black : 'rgb(0,0,0)',
-  eraser : 'rgb(255,255,255)'
+  rainbow: function(color){return Math.floor(Math.random() * 255)},
+  red: `rgb(255, 0, 0)`,
+  green: `rgb(0, 255, 0)`,
+  blue: 'rgb(0, 0, 255)',
+  black: 'rgb(0, 0, 0)',
+  brown: 'rgb(150, 75, 0)',
+  pink: 'rgba(255, 0, 144)',
+  eraser: 'rgb(255, 255, 255)'
 };
 
 //~~~~~colorPicker()~~~~~~~
 //
 //picks a random number between 0 and 255 and returns it.
 function randomColorPicker() {
-  return Math.floor(Math.random() * 255);
+  return 'Hello';
+  //return Math.floor(Math.random() * 255);
 }
 
 //~~~~~~setColor()~~~~~~
@@ -36,15 +41,9 @@ function setColor(pixel, color) {
   console.log(color);
 }
 
-//sets the fade time of the pixel it was passed
-function setFade(pixel) {
-  setTimeout(() => {
-    pixel.style.background = "rgb(255,255,255)"
-  }, 500);
-}
-
-//wait for the window object to load before doing anything
+//wait for the window object to load before creating canvas
 window.onload = () => {
+
   //~~~~~makeCanvas()~~~~~~~
   //
   //mmakes a canvas out of a bunch of div "pixels".
@@ -80,10 +79,31 @@ window.onload = () => {
   }
   // lets make a canvas!
   makeCanvas();
-
+  //create an eventlistener to check for key press events
+  document.addEventListener("keyup", keyHandler);
+  //hande the key press events
+  function keyHandler(keyEvent) {
+    if (keyEvent.key === "ArrowLeft") {
+      rotation -= 10;
+      console.log(rotation);
+    } else if (keyEvent.key === "ArrowRight") {
+      rotation += 10;
+      console.log(rotation);
+    }
+    for (let i = 0; i < $("canvas").childNodes.length; i++) {
+      $("canvas").childNodes[i].style.transform = `rotate(${rotation}deg)`;
+    }
+  }
 }
 
-
+//~~~~~~~~~~~~reset()~~~~~~~~~~~~//
+//
+// reset the canvas to white
+function reset() {
+  for (let i = 0; i < $("canvas").childNodes.length; i++) {
+    $("canvas").childNodes[i].style.background = colors["eraser"];
+  }
+}
 
 
 
