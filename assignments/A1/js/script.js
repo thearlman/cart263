@@ -4,10 +4,12 @@
 //For CART263 Winter 2020 Concordia U
 //By: Asa Perlman
 //Inspiration and starter code by: Pippin Barr
-//Icons by Microsoft(c) VVVV
+//Printer, Trashcan, and Sword icons by Microsoft(c):
 //https://github.com/mRB0/many-windows-3.1-icons-in-png-format
+//Rainbow Icon:
+//https://www.hastac.org/blogs/fionab/2014/03/17/asa-2014-panel-queer-os
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// A very basic paint program, created in a unique, and (ineficient?) way.
+// A very basic paint program, created in a unique, and (inefficient?) way.
 // Choose between 6 colors, or rainbow mode. You can even print your
 //creation, or save it as a pdf  0 0
 //                                -
@@ -118,7 +120,6 @@ window.onload = () => {
 
     } else if (keyEvent.key === "ArrowRight") {
       rotation += 10;
-
     }
     for (let i = 0; i < $("canvas").childNodes.length; i++) {
       $("canvas").childNodes[i].style.transform = `rotate(${rotation}deg)`;
@@ -133,12 +134,14 @@ function printPic(){
   //package the canvas into a variable
   let content = $("canvasWrapper").innerHTML;
   //open a new window
-  let printWindow = window.open('','my pic {:-)','width=500, height=500');
+  let printWindow = window.open('','','width=500, height=500');
+
   //write the canvas into the window, making sure to link the stylesheet
   //and add a button to print
   printWindow.document.write(`
-    <link rel="stylesheet" type="text/css" href="css/style.css">`
-    +content+`<button onclick='window.print()'>PRINT</button>`);
+    <title>My Pic</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    ${content}<button onclick='window.print()'>PRINT</button>`);
   }
 
 //~~~~~~~~~~~~reset()~~~~~~~~~~~~//

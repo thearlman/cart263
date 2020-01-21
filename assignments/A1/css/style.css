@@ -28,7 +28,7 @@ button{
 
 .pixel{
   transform: rotate(0deg);
-  background: rgb(255,255,255);
+  background: rgb(255, 255, 255);
   width: 100%;
   height: 100%;
 }

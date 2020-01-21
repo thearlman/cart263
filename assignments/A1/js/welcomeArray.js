@@ -11,7 +11,7 @@
 // }
 
 
-//This is the array of pixel positions to recall the welcome message
+//This is the array of pixel positions to recal the welcom message
 let welcomeMessage = [
   101,
   105,
@@ -178,9 +178,9 @@ let welcomeMessage = [
   913,
   914,
   915,
-  917,
   918,
   919,
+  920,
   923,
   924,
   925,
@@ -195,8 +195,8 @@ let welcomeMessage = [
   958,
   960,
   964,
-  967,
-  969,
+  968,
+  970,
   974,
   978,
   984,
@@ -208,8 +208,8 @@ let welcomeMessage = [
   1009,
   1010,
   1014,
-  1017,
-  1019,
+  1018,
+  1020,
   1024,
   1028,
   1029,
@@ -220,8 +220,8 @@ let welcomeMessage = [
   1058,
   1060,
   1064,
-  1067,
-  1069,
+  1068,
+  1070,
   1074,
   1078,
   1084,
@@ -233,8 +233,8 @@ let welcomeMessage = [
   1113,
   1114,
   1115,
-  1117,
-  1119,
+  1118,
+  1120,
   1124,
   1128,
   1129,
