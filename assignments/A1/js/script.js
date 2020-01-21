@@ -82,7 +82,7 @@ window.onload = () => {
       for (let e = 0; e < welcomeMessage.length; e++){
         if (i === welcomeMessage[e]){
           setTimeout(()=>{
-            $("canvas").childNodes[i].style.background = colors["black"]();
+            $("canvas").childNodes[i].style.background = colors["rainbow"]();
           }, 500);
         }
       }
