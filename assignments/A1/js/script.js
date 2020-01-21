@@ -27,8 +27,7 @@ function $(id) {
   return document.getElementById(id);
 }
 
-//current rotation value for the pixels
-let rotation = 0;
+//~~~~~~ Global Variables~~~~~~~~~~~~~
 
 //key-values for all the colors available.
 let colors = {
@@ -48,6 +47,12 @@ let colors = {
 
 //the current color user is painting with
 let currentColor = colors['black'];
+
+//current rotation value for the pixels
+const ROTATE_AMOUNT = 10;
+const NUM_PIXELS = 2500;
+let CANVAS_STARTING_COLOR = colors["rainbow"];
+let rotation = 0;
 
 //~~~~~colorPicker()~~~~~~~
 //
@@ -69,7 +74,7 @@ window.onload = () => {
     let canvas = $("canvas");
     canvas.draggable = false;
     //classic for loop up to 1000
-    for (let i = 0; i < 2500; i++) {
+    for (let i = 0; i < NUM_PIXELS; i++) {
       //create a div and call it "pixel"
       let pixel = document.createElement("div");
       //give it a class
@@ -84,7 +89,7 @@ window.onload = () => {
       for (let e = 0; e < welcomeMessage.length; e++){
         if (i === welcomeMessage[e]){
           setTimeout(()=>{
-            $("canvas").childNodes[i].style.background = colors["rainbow"]();
+            $("canvas").childNodes[i].style.background = CANVAS_STARTING_COLOR();
           }, 500);
         }
       }
@@ -111,15 +116,16 @@ window.onload = () => {
 
   // lets make a canvas!
   makeCanvas();
+
   //create an eventlistener to check for key press events
-  document.addEventListener("keyup", keyHandler);
+  document.addEventListener("keydown", keyHandler);
   //hande the key press events
   function keyHandler(keyEvent) {
+    console.log("event!");
     if (keyEvent.key === "ArrowLeft") {
-      rotation -= 10;
-
+      rotation -= ROTATE_AMOUNT;
     } else if (keyEvent.key === "ArrowRight") {
-      rotation += 10;
+      rotation += ROTATE_AMOUNT;
     }
     for (let i = 0; i < $("canvas").childNodes.length; i++) {
       $("canvas").childNodes[i].style.transform = `rotate(${rotation}deg)`;

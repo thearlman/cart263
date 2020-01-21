@@ -1,5 +1,7 @@
-//To save a welcome message, use this code is the console, and then save as a
-//global variable (right click on the array) and then use copy(temp1) to save to cipboard
+//To save a welcome message, use this code in the console, and then save num[] as a
+//global variable (right click on the array) and then use copy(temp1) to savearray
+// to cipboard. Make sure to change CANVAS_STARTING_COLOR to "black"
+//
 
 // let num = [];
 // let divPos = 0;
@@ -250,13 +252,12 @@ let welcomeMessage = [
   1313,
   1314,
   1315,
-  1316,
   1353,
   1355,
   1358,
   1360,
   1363,
-  1366,
+  1365,
   1403,
   1404,
   1405,
@@ -264,20 +265,19 @@ let welcomeMessage = [
   1409,
   1410,
   1413,
-  1416,
+  1415,
   1453,
   1458,
   1460,
   1461,
   1463,
-  1466,
+  1465,
   1503,
   1508,
   1511,
   1513,
   1514,
   1515,
-  1516,
   1603,
   1604,
   1605,
@@ -291,7 +291,6 @@ let welcomeMessage = [
   1613,
   1614,
   1615,
-  1616,
   1803,
   1804,
   1805,
