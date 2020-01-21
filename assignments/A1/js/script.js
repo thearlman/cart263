@@ -39,7 +39,6 @@ function randomColorPicker() {
   ${Math.floor(Math.random() * 255)})`;
 }
 
-
 //wait for the window object to load before creating canvas
 window.onload = () => {
 
@@ -50,7 +49,7 @@ window.onload = () => {
     let canvas = $("canvas");
     canvas.draggable = false;
     //classic for loop up to 1000
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 2500; i++) {
       //create a div and call it "pixel"
       let pixel = document.createElement("div");
       //give it a class
@@ -58,6 +57,7 @@ window.onload = () => {
       //append it to the body
       canvas.appendChild(pixel);
     }
+
     //when user is holding mouse inside of the canvas iterate through all
     //of the pixels and set a handler to change their color
     canvas.onmousedown = () => {
@@ -96,6 +96,13 @@ window.onload = () => {
     }
   }
 }
+function printPic(){
+  let content = $("canvasWrapper").innerHTML;
+  let printWindow = window.open('','my pic {:-)','width=500, height=500');
+  printWindow.document.write(`
+    <link rel="stylesheet" type="text/css" href="css/style.css">`
+    +content+`<button onclick='window.print()'>PRINT</button>`);
+  }
 
 //~~~~~~~~~~~~reset()~~~~~~~~~~~~//
 //

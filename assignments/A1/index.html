@@ -5,7 +5,7 @@
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
 
     <!-- CSS stylesheet(s) -->
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Library script(s) -->
     <!-- Add your required libraries here either as local files or CDN-hosted files -->
     <!-- <script src="js/libraries/p5.min.js"></script> -->
@@ -16,7 +16,9 @@
   </head>
 
   <body>
+    <div id="canvasWrapper">
     <div id="canvas"></div>
+    </div>
     <div id="buttonWrapper">
       <div id="rainbow" class="buttons" onclick="currentColor = colors.rainbow;"></div>
       <div id="red" class="buttons" onclick="currentColor = colors.red;"></div>
@@ -26,6 +28,7 @@
       <div id="brown" class="buttons" onclick="currentColor = colors['brown'];"></div>
       <div id="pink" class="buttons" onclick="currentColor = colors['pink'];"></div>
       <div id="erase" class="buttons" onclick="currentColor = colors['eraser'];"></div>
+      <div id="print" class="buttons" onclick="printPic();"></div>
       <div id="reset" class="buttons" onclick="reset();"></div>
 
 

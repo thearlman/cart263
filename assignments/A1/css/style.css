@@ -11,16 +11,19 @@ body {
   user-select: none;
 }
 
+button{
+  margin-top: 5vh;
+}
+
 #canvas{
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
-  grid-template-rows: repeat(100, 1fr);
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(50, 1fr);
   min-width: 75vh;
   height: 75vh;
-  border-top: solid 1px green;
-  border-left: solid 1px green;
-  border-right: solid 1px green;
+  border: solid 1px green;
   padding: .5vh;
+  cursor:url(../assets/images/cursor.png), auto;
 }
 
 .pixel{
@@ -33,7 +36,9 @@ body {
 #buttonWrapper{
   min-width: 75vh;
   height: 5vh;
-  border: solid 1px green;
+  border-bottom: solid 1px green;
+  border-left: solid 1px green;
+  border-right: solid 1px green;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -42,7 +47,8 @@ body {
 }
 
 #rainbow{
-  background: url('../assets/images/pen.png') no-repeat center center;
+  background: url(../assets/images/pen.png) no-repeat center center;
+  background-size: contain;
 }
 
 #red{
@@ -69,6 +75,11 @@ body {
 }
 #reset{
   background: url(../assets/images/trash.png) no-repeat center center;
+  background-size: contain;
+}
+#print{
+  background: url(../assets/images/print.png) no-repeat center center;
+  background-size: contain;
 }
 .buttons{
   box-shadow: .25vh .25vh grey;
