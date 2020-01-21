@@ -75,6 +75,19 @@ window.onload = () => {
       //append it to the body
       canvas.appendChild(pixel);
     }
+
+    // iterate throught the welcome message stored in welcomeArray.js
+    // and make the corresponding pixels black, displaying the welcom message
+    for (let i = 0; i < $("canvas").childNodes.length; i++){
+      for (let e = 0; e < welcomeMessage.length; e++){
+        if (i === welcomeMessage[e]){
+          setTimeout(()=>{
+            $("canvas").childNodes[i].style.background = colors["black"]();
+          }, 500);
+        }
+      }
+    }
+
     //when user is holding mouse inside of the canvas iterate through all
     //of the pixels and set a handler to change their color
     canvas.onmousedown = () => {
