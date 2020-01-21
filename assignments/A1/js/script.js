@@ -1,14 +1,31 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~PIXEL PAINTER PRO~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//For CART263 Winter 2020 Concordia U
+//By: Asa Perlman
+//Inspiration and starter code by: Pippin Barr
+//Icons by Microsoft(c) VVVV
+//https://github.com/mRB0/many-windows-3.1-icons-in-png-format
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// A very basic paint program, created in a unique, and (ineficient?) way.
+// Choose between 6 colors, or rainbow mode. You can even print your
+//creation, or save it as a pdf  0 0
+//                                -
+//                               \_/
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 "use strict";
 
 //~~~~~~~~$()~~~~~~~~~
 //
 //returns an element on the pagee, according to the id it was fed
-//this means that: $("someId") can be used in place of the whole string
+//this means that: [$("someId")] can be used in place of:
+// [document.getElementById("someId")]
 function $(id) {
   return document.getElementById(id);
 }
 
-//current rotation
+//current rotation value for the pixels
 let rotation = 0;
 
 //key-values for all the colors available.
@@ -23,7 +40,7 @@ let colors = {
   blue: ()=>{return 'rgb(0, 0, 255)'},
   black: ()=>{return 'rgb(0, 0, 0)'},
   brown: ()=>{return 'rgb(150, 75, 0)'},
-  pink: ()=>{return 'rgba(255, 0, 144)'},
+  yellow: ()=>{return 'rgba(255, 255, 0)'},
   eraser: ()=>{return 'rgb(255, 255, 255)'}
 };
 
@@ -44,6 +61,7 @@ window.onload = () => {
 
   //~~~~~makeCanvas()~~~~~~~
   //
+  //PT1: the pixel array
   //mmakes a canvas out of a bunch of div "pixels".
   function makeCanvas() {
     let canvas = $("canvas");
@@ -57,7 +75,6 @@ window.onload = () => {
       //append it to the body
       canvas.appendChild(pixel);
     }
-
     //when user is holding mouse inside of the canvas iterate through all
     //of the pixels and set a handler to change their color
     canvas.onmousedown = () => {
@@ -68,7 +85,6 @@ window.onload = () => {
         }
       }
     }
-
     //when user releases the mouse, remove the event handler
     canvas.onmouseup = () => {
       for (let i = 0; i < canvas.childNodes.length; i++) {
@@ -96,9 +112,17 @@ window.onload = () => {
     }
   }
 }
+
+//~~~~~~~~~~~printPic()~~~~~~~~~~~~~
+//
+//offers the user the opportunity to print their masterpiece
 function printPic(){
+  //package the canvas into a variable
   let content = $("canvasWrapper").innerHTML;
+  //open a new window
   let printWindow = window.open('','my pic {:-)','width=500, height=500');
+  //write the canvas into the window, making sure to link the stylesheet
+  //and add a button to print
   printWindow.document.write(`
     <link rel="stylesheet" type="text/css" href="css/style.css">`
     +content+`<button onclick='window.print()'>PRINT</button>`);
