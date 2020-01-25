@@ -20,7 +20,7 @@
 
 //~~~~~~~~$()~~~~~~~~~
 //
-//returns an element on the pagee, according to the id it was fed
+//returns an element on the page, according to the id it was fed
 //this means that: [$("someId")] can be used in place of:
 // [document.getElementById("someId")]
 function $(id) {
@@ -47,12 +47,14 @@ let colors = {
 
 //the current color user is painting with
 let currentColor = colors['black'];
-
+//color of the pixels when welcome message is printed
+let pixelStartingColor = colors["rainbow"];
 //current rotation value for the pixels
-const ROTATE_AMOUNT = 10;
-const NUM_PIXELS = 2500;
-let CANVAS_STARTING_COLOR = colors["rainbow"];
 let rotation = 0;
+//number of degrees to rotate the pixels
+const ROTATE_AMOUNT = 2;
+//number of pixels to create (make sure to coordinate with the CSS grid)
+const NUM_PIXELS = 2500;
 
 //~~~~~colorPicker()~~~~~~~
 //
@@ -65,7 +67,8 @@ function randomColorPicker() {
 
 //wait for the window object to load before creating canvas
 window.onload = () => {
-
+  //define the canvas object
+  let canvas = $("canvas");
   //~~~~~makeCanvas()~~~~~~~
   //
   //PT1: the pixel array
@@ -79,6 +82,10 @@ window.onload = () => {
       let pixel = document.createElement("div");
       //give it a class
       pixel.setAttribute("class", "pixel");
+      //when pixel is clicked, make it change color
+      pixel.addEventListener("mousedown", ()=>{
+        pixel.style.background = currentColor();
+      })
       //append it to the body
       canvas.appendChild(pixel);
     }
@@ -89,7 +96,7 @@ window.onload = () => {
       for (let e = 0; e < welcomeMessage.length; e++){
         if (i === welcomeMessage[e]){
           setTimeout(()=>{
-            $("canvas").childNodes[i].style.background = CANVAS_STARTING_COLOR();
+            canvas.childNodes[i].style.background = pixelStartingColor();
           }, 500);
         }
       }
@@ -121,15 +128,27 @@ window.onload = () => {
   document.addEventListener("keydown", keyHandler);
   //hande the key press events
   function keyHandler(keyEvent) {
-    console.log("event!");
+    //if the key presed is the left arrow
     if (keyEvent.key === "ArrowLeft") {
+      //subtract rotate amount from rotation variable
       rotation -= ROTATE_AMOUNT;
+      //call the rotate pixel function via request animation frame
+      window.requestAnimationFrame(rotatePixel)
+      //if th eopposite is true...
     } else if (keyEvent.key === "ArrowRight") {
+      //you get the idea
       rotation += ROTATE_AMOUNT;
+      window.requestAnimationFrame(rotatePixel)
     }
-    for (let i = 0; i < $("canvas").childNodes.length; i++) {
-      $("canvas").childNodes[i].style.transform = `rotate(${rotation}deg)`;
-    }
+  }
+}
+
+//
+function rotatePixel(){
+  console.log("roating");
+  //iterate through all of the canvas's inner divs and rotate them by the current rotation amount
+  for (let i = 0; i < canvas.childNodes.length; i++) {
+    canvas.childNodes[i].style.transform = `rotate(${rotation}deg)`;
   }
 }
 
@@ -154,8 +173,8 @@ function printPic(){
 //
 // reset the canvas to white
 function reset() {
-  for (let i = 0; i < $("canvas").childNodes.length; i++) {
-    $("canvas").childNodes[i].style.background = colors["eraser"]();
+  for (let i = 0; i < canvas.childNodes.length; i++) {
+    canvas.childNodes[i].style.background = colors["eraser"]();
   }
 }
 
