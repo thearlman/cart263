@@ -7,6 +7,20 @@ body {
   align-items: center;
 }
 
+#welcomeScreen{
+  position: fixed;
+  top: 14vh;
+  width: 50vh;
+  height: 50vh;
+  padding: 1vh;
+  overflow-y: auto;
+  /* border: solid 1px green; */
+  font-size: 1.9vh;
+  user-select: none;
+  color: rgb(0,255,0);
+  text-shadow: 0 0 3px rgb(0,255,0);
+}
+
 #monitor{
   display: flex;
   background: url(../assets/images/monitor.png) no-repeat center center;
@@ -25,10 +39,35 @@ body {
   /* border: solid 1px green; */
   font-size: 1.9vh;
   user-select: none;
-  box-sizing: content-box;
+  visibility: hidden;
+  color: rgb(0,255,0);
 }
-p{
-  color: green;
+
+#welcomeScreen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    background: rgba(0,255,0,.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0,255,0, 1);
+}
+
+#startButton{
+  border: solid .1vh rgb(0,255,0);
+  padding: .5vh;
+  width: min-content;
+}
+#startButton:hover{
+  cursor: pointer;
+  text-shadow: 0 0 10px rgb(0,255,0);
+  box-shadow: 0 0 10px rgb(0,255,0);
+
 }
 
 .redacted{
@@ -44,6 +83,14 @@ p{
   background: transparent;
   color: rgba(0, 255, 0, 1);
   animation: flash infinite .1s;
+}
+.secret{
+}
+
+.secretFound{
+  background: rgba(0, 255, 0, 1);
+  color: rgba(0, 0, 0, 1);
+  padding: .2vh;
 }
 
 @keyframes flash {
