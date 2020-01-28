@@ -3,16 +3,50 @@ body {
   margin: 0;
   padding: 255;
   box-sizing: border-box;
-  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
 
+#monitor{
+  display: flex;
+  background: url(../assets/images/monitor.png) no-repeat center center;
+  background-size: contain;
+  width: 60%;
+  height: 100vh;
+  justify-content: center;
+}
+#textWrapper{
+  position: fixed;
+  top: 14vh;
+  width: 50vh;
+  height: 50vh;
+  padding: 1vh;
+  overflow-y: scroll;
+  /* border: solid 1px green; */
+  font-size: 1.9vh;
+  user-select: none;
+  box-sizing: content-box;
+}
+p{
+  color: green;
 }
 
 .redacted{
-  background: rgba(0, 0, 0, 1);
+  background: rgba(0, 255, 0, 1);
   color: transparent;
 }
 
+.revealed:hover{
+  cursor: pointer;
+}
+
 .revealed{
-  background: rgba(0, 0, 0, 0);
-  color: rgba(255, 0, 0, 1);
+  background: transparent;
+  color: rgba(0, 255, 0, 1);
+  animation: flash infinite .1s;
+}
+
+@keyframes flash {
+  from {color: rgba(0, 255, 0, 1);}
+  to { color: rgba(0, 255, 0, 0);}
 }
