@@ -1,46 +1,10 @@
 body {
   display: flex;
   margin: 0;
-  padding: 255;
+  padding: 0;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
-}
-
-#welcomeScreen{
-  position: fixed;
-  top: 14vh;
-  width: 50vh;
-  height: 50vh;
-  padding: 1vh;
-  overflow-y: auto;
-  /* border: solid 1px green; */
-  font-size: 1.9vh;
-  user-select: none;
-  color: rgb(0,255,0);
-  text-shadow: 0 0 3px rgb(0,255,0);
-}
-
-#monitor{
-  display: flex;
-  background: url(../assets/images/monitor.png) no-repeat center center;
-  background-size: contain;
-  width: 60%;
-  height: 100vh;
-  justify-content: center;
-}
-#textWrapper{
-  position: fixed;
-  top: 14vh;
-  width: 50vh;
-  height: 50vh;
-  padding: 1vh;
-  overflow-y: scroll;
-  /* border: solid 1px green; */
-  font-size: 1.9vh;
-  user-select: none;
-  visibility: hidden;
-  color: rgb(0,255,0);
 }
 
 #welcomeScreen{
@@ -48,6 +12,83 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: fixed;
+  top: 14vmin;
+  width: 50vmin;
+  height: 50vmin;
+  padding: 1vmin;
+  overflow-y: auto;
+  /* border: solid 1px green; */
+  font-size: 1.9vmin;
+  user-select: none;
+  color: rgb(0,255,0);
+  text-shadow: 0 0 3px rgb(0,255,0);
+  visibility: visible;
+}
+
+#startButton{
+  border: solid .1vmin rgb(0,255,0);
+  padding: .5vmin;
+  width: min-content;
+}
+#startButton:hover{
+  cursor: pointer;
+  text-shadow: 0 0 10px rgb(0,255,0);
+  box-shadow: 0 0 10px rgb(0,255,0);
+}
+
+#monitor{
+  display: flex;
+  background: url(../assets/images/monitor.png) no-repeat center center;
+  background-size:  contain;
+  width: 60vmax;
+  height: 100vmin;
+  justify-content: center;
+}
+#textWrapper{
+  position: fixed;
+  top: 14vmin;
+  width: 50vmin;
+  height: 50vmin;
+  padding: 1vmin;
+  overflow-y: scroll;
+  /* border: solid 1px green; */
+  font-size: 1.9vmin;
+  user-select: none;
+  visibility: hidden;
+  color: rgb(0,255,0);
+}
+
+#gameOver{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 14vmin;
+  width: 50vmin;
+  height: 50vmin;
+  padding: 1vmin;
+  overflow-y: auto;
+  font-size: 1.9vmin;
+  user-select: none;
+  color: rgb(0,255,0);
+  text-shadow: 0 0 3px rgb(0,255,0);
+  visibility: hidden;
+}
+#gameOver h1{
+  text-decoration: underline;
+}
+
+#playAgain{
+  border: solid .1vmin rgb(0,255,0);
+  padding: .5vmin;
+  width: min-content;
+}
+#playAgain:hover{
+  cursor: pointer;
+  text-shadow: 0 0 10px rgb(0,255,0);
+  box-shadow: 0 0 10px rgb(0,255,0);
 }
 
 ::-webkit-scrollbar {
@@ -58,17 +99,7 @@ body {
   background: rgba(0,255,0, 1);
 }
 
-#startButton{
-  border: solid .1vh rgb(0,255,0);
-  padding: .5vh;
-  width: min-content;
-}
-#startButton:hover{
-  cursor: pointer;
-  text-shadow: 0 0 10px rgb(0,255,0);
-  box-shadow: 0 0 10px rgb(0,255,0);
 
-}
 
 .redacted{
   background: rgba(0, 255, 0, 1);
@@ -90,7 +121,7 @@ body {
 .secretFound{
   background: rgba(0, 255, 0, 1);
   color: rgba(0, 0, 0, 1);
-  padding: .2vh;
+  padding: .2vmin;
 }
 
 @keyframes flash {
