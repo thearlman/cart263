@@ -3,3 +3,32 @@ body {
   padding: 255;
   box-sizing: border-box;
 }
+
+#canvas{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  overflow: hidden;
+  justify-content: center;
+  align-items: flex-end;
+
+}
+
+
+#keyboardWrapper{
+  width: 50vw;
+  height: 25vh;
+
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(8, 3fr);
+}
+/* For individual key Id's, see the keys. */
+.key{
+  /* width:5vh;
+  height: 5vh; */
+  background: white;
+  border: solid 1px red;
+  color: black;
+}
