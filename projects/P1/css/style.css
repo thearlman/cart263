@@ -6,13 +6,34 @@ body {
 
 #canvas{
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   background: rgb(0, 0, 0);
   overflow: hidden;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 
+
+}
+#screen{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: flex-start;
+  width: 90%;
+  height: 40vh;
+  border: solid 1px green;
+}
+
+.letter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 4vh;
+  min-width: 2vh;
 }
 
 
@@ -22,12 +43,16 @@ body {
 
   display: grid;
   grid-template-columns: repeat(22, 1fr);
-  grid-template-rows: repeat(8, 3fr);
+  grid-template-rows: repeat(10, 3fr);
 }
 /* For individual key Id's, see the keys. */
 .key{
   /* width:5vh;
   height: 5vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vh;
   background: white;
   border: solid 1px red;
   color: black;
