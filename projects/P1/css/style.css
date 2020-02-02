@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 255;
   box-sizing: border-box;
+  font-family:  courier;
 }
 
 #canvas{
