@@ -23,6 +23,8 @@ $(document).ready(function() {
     $(`#k${i}`).text(keyLayout[i]);
   }
   generateSentence();
+
+  $("#lettersToType").text(`You have ${SENTENCE_LENGTH} letters left to type.`);
 })
 
 
@@ -52,7 +54,7 @@ $(document).on("keydown", () => {
         keySFX.pause()
       }, 80);
       //change that element's background to red
-      $(element).css("transform", "translateY(4px)");
+      $(element).css("transform", "translateY(2px)");
       $(document).on("keyup", ()=>{
         $(element).css("transform", "translateY(0)");
       })
@@ -60,20 +62,24 @@ $(document).on("keydown", () => {
       if (event.key === "Backspace") {
         $("#userInput").children().last().remove();
         sentence = sentence.slice(0, sentence.length - 1);
+        charactersLeft(null);
         //if the key pressed is shift, dont do shi*t
       } else if (event.key === "Shift"){
         return;
-      } else {
+      } else if(sentence.length < 50) {
         // else append the key which is pressed into the userInput div
         $("#userInput").append(`<div class = "letter">${event.key}</div>`);
         sentence += element.innerHTML;
+        $("#lettersToType").text(`You have ${SENTENCE_LENGTH - sentence.length} letters left to type.`)
         //if player has reached the end of the sentence, show them where their errors are
         if (sentence.length >= targetSentence.length){
+          let incorrectChars = 0;
           for (let i = 0; i < $("#userInput").children().length; i++){
             if ($("#userInput").children()[i].innerHTML != targetSentence[i]){
               $("#userInput").children()[i].style.background  = "rgba(0, 0, 0, .4)";
               $("#userInput").children()[i].style.animation = "shake 4s";
-
+              incorrectChars ++;
+              charactersLeft(incorrectChars);
               return
             }
           }
@@ -107,6 +113,7 @@ function sentenceMesserUpper() {
   setTimeout(()=>{
     $("#userInput").children()[ranDiv].style.background = "rgba(0, 0, 0, .4)";
     $("#userInput").children()[ranDiv].style.animation = "shake 4s";
+    charactersLeft(1);
   }, 500)
 }
 
@@ -118,5 +125,9 @@ function generateSentence() {
     console.log("'"+targetSentence+"'");
     generateSentence();
   }
-  $("#typeMe").text(`Please Type: "${targetSentence}" exactly as shown.`);
+  $("#typeMe").text(`Please Type: "${targetSentence}" Exactly as shown.`);
+}
+
+function charactersLeft(incorrectChars){
+  $("#lettersToType").text(`You have ${SENTENCE_LENGTH - sentence.length + incorrectChars} letters left to type.`)
 }
