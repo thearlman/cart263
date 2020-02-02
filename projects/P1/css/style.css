@@ -3,57 +3,91 @@ body {
   padding: 255;
   box-sizing: border-box;
   font-family:  courier;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
 
 #canvas{
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background: rgb(0, 0, 0);
+  width: 50vw;
+  height: 90vh;
+  background: rgb(10, 10, 10);
   overflow: hidden;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  box-shadow:
+  1px 1px rgb(50, 50, 50),
+  2px 2px rgb(75, 75, 75),
+  3px 3px rgb(100, 100, 100),
+  4px 4px rgb(125, 125, 125),
+  5px 5px rgb(125, 125, 125),
+  6px 6px rgb(125, 125, 125),
+  7px 7px rgb(125, 125, 125),
+  8px 8px rgb(125, 125, 125);
+}
+
+#screenWrapper{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 40%;
+  /* height: 40vh; */
+  margin-bottom: 5vh;
+  padding: 2%;
+  background: rgb(127, 127, 127);
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 80px rgba(0, 0, 0, .9);
 }
 #typeMe{
   width: 90%;
-  color: white;
+  font-size: 1em;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
+  color: rgba(0, 0, 0, .6);
 }
-#screenWrapper{
-  width: 90%;
-  height: 40vh;
-  /* height: 40vh; */
-  border: solid 1px red;
-}
-#screen{
+#userInput{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
   max-width: 100%;
-  /* height: 40vh; */
-  border: solid 1px green;
+}
+
+#lettersToType{
+  width: 90%;
+  font-size: 1em;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
+  color: rgba(0, 0, 0, .6);
 }
 
 .letter{
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 4vh;
+  color: rgba(0, 0, 0, .6);
+  font-size: 2em;
   min-width: 2vh;
-  line-height:4vh;
-  /* max-height: 4vh; */
+  min-height: 4vh;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9);
+  border-radius: 5px;
 }
 
+.flashingCursor{
+  /* border: rgba(255,0,0); */
+  animation: flash infinite 1s;
+}
 
 #keyboardWrapper{
-  width: 50vw;
+  width: 85%;
   height: 25vh;
-
+  grid-gap: 3%;
   display: grid;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(26, 1fr);
   grid-template-rows: repeat(10, 3fr);
 }
 /* For individual key Id's, see the keys. */
@@ -63,10 +97,38 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4vh;
-  background: white;
-  border: solid 1px red;
+  font-size: 100%;
+  min-width: 100%;
+  max-height: 100%;
+  background: rgb(200, 200, 200);
+  border-radius: 5px;
   color: black;
+  border: solid 1px rgb(220, 220, 220);
+  box-shadow: 1px 1px rgb(255,255,255), 2px 2px rgb(200,200,200), 3px 3px rgb(150,150,150), 4px 4px rgb(100,100,100);
   /* perspective-origin: left;
   perspective: -100px; */
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+
+@keyframes flash {
+  from {color: rgba(0, 0, 0, 1);}
+  to { color: rgba(0, 0, 0, 0);}
 }
