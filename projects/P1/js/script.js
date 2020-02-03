@@ -75,7 +75,7 @@ function autoType(content) {
     $("#enterMessage").css({"animation" : "flash .5s infinite", "animation-direction" : "alternate"});
     //add a one-time event listner for keydown
     $(document).one("keydown", ()=>{
-      keySound();
+      // keySound();
       //reset charpos (for good measure)
       charPos = 0;
       //start the game
