@@ -1,3 +1,10 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~ Fidgephus Pro ~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//By: Asa Perlman
+//Inspiration from: CART263 (Pippin Barr) Conco U Winter 2020
+//
+//~~~~~~~~~~~~~~~~~Credz where Credz'z Due~~~~~~~~~~~~~~~~~~~
 //Quick tutorial on handling multi-key presses:
 //https://www.gavsblog.com/blog/detect-single-and-multiple-keypress-events-javascript
 //Typing sound effect:
@@ -9,11 +16,25 @@
 //clear sound:
 //http://soundbible.com/5-Answering-Machine-Beep.html
 
-//~~~~~~~~~~put javaScript here~~~~~~~~~~~
-"use strict";
+//~~~~~~~~~~~~~~~~~~~~~In Brief~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//As Idle hands are the devils workshop; Fidgephus offers infinite
+//hours of fingerobics.
+//
+//It is the year 2042. As artificial intelligence has rendered
+//CAPTCHA, obsolete, the human race has found itself desperately in need
+//of something to fill the moments once spent training image recognition
+//models. Inspired in equal measures by CAPTCHA, Fidget Spinners, and the
+//tactile days of yore, the Fidgephus Pro was invented. 
 
+
+
+//~~~~~~~~~~put javaScript here~~~~~~~~~~~
+//be strict about the ;'s
+"use strict";
 let keyLayout = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Backspace", " ", "Shift"];
 let shiftKeys = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", '"', "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "Backspace ", " ", "Shift"];
+
+let currentKeyboard = keyLayout;
 
 let welcomeMessage = `Welcome Back #27080232.
 Today you will be transcribing passages from "The Myth of Sysiphus."
@@ -22,7 +43,6 @@ When a sentence has been transcribed, you may move on.
 You must complete at least 5 sentences before taking a break.`
 
 
-let currentKeyboard = keyLayout;
 
 let keySFX = new Audio();
 keySFX.src = "assets/sounds/typing.mp3";
@@ -49,11 +69,15 @@ $(document).ready(function() {
     JQuery-3.4.1: https://code.jquery.com/jquery-3.4.1.min.js,
     JQueryUi-1.12.1: https://code.jquery.com/ui/1.12.1/jquery-ui.min.js
     Curious? drop me a line: asaperlman@gmail.com`);
-  //make the keyboard
+  //generate the keyboard:
   for (let i = 0; i < keyLayout.length; i++) {
+    //append a div to the keyboard wrapper, for every entry in the
+    //key layout array, assigning it an id that coresponds with it index
     $("#keyboardWrapper").append(`<div id = "k${i}" class = "key"></div>`);
+    //insert the text from this index into the newly made div
     $(`#k${i}`).text(keyLayout[i]);
   }
+  //trigger the auto printing
   autoType(welcomeMessage);
 })
 
@@ -204,7 +228,7 @@ function modifierCheck(eventKey) {
     }
   }
   //sets listner for key coming back up
-  $(document).on("keyup", () => {
+  $(document).one("keyup", () => {
     //remove the key-value
     delete multiCheck[eventKey];
     //change keyboard variable back to default
