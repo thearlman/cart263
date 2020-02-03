@@ -5,7 +5,7 @@
 "use strict";
 
 let keyLayout = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Backspace", " ", "Shift"];
-let shiftKeys = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "p", "{", "}", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", '"', "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "Backspace ", " ", "Shift"];
+let shiftKeys = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "{", "}", "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", '"', "Z", "X", "C", "V", "B", "N", "M", "<", ">", "?", "Backspace ", " ", "Shift"];
 
 let welcomeMessage = `Welcome Back #27080232.
 Today you will be transcribing passages from "The Myth of Sysiphus."
@@ -25,6 +25,7 @@ let SENTENCE_LENGTH = 50;
 let targetSentence;
 let sentence = "";
 let multiCheck = {};
+let attemptsRemaining = 3;
 
 //when document has loaded
 $(document).ready(function() {
@@ -51,24 +52,35 @@ function typeThang(content) {
     $('#typeMe').append(currentChar);
     charPos++;
   }
+  //when all of the characters have been printed out
   if (charPos >= content.length) {
+    //prompt player to press a key
     $("#typeMe").append(`<p id='enterMessage'> Press Any Key To Continue</p>`);
+    //make the message flash
     $("#enterMessage").css({"animation" : "flash .5s infinite", "animation-direction" : "alternate"});
+    //add a one-time event listner for keydown
     $(document).one("keydown", ()=>{
+      //reset charpos (for good measure)
       charPos = 0;
-      generateSentence();
-      charactersLeft(null);
+      //start the game
       gameStart();
-
     })
+    //break out of the loop
     return;
   }
+  //start the whole process again
   setTimeout(typeThang, Math.floor(Math.random() * 10), content);
 }
 
 function gameStart(){
-  //listens for a keydown event
-  $(document).on("keydown", () => {
+  //generate first sentence
+  generateSentence();
+  //initiate character counter
+  charactersLeft(null);
+  //initiate score counter
+  $("#score").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
+  //set listner for keydown, to the handleInput function
+  $(document).on("keydown", ()=>{
     handleInput(event.key);
   });
 }
@@ -115,6 +127,7 @@ function checkResults() {
   //if player actually types it correctly, mess it up for them
   if (sentence === targetSentence) {
     sentenceMesserUpper();
+    attemptsRemaining --;
   } else {
     //else show them where their errors are
     let incorrectChars = 0;
@@ -124,11 +137,24 @@ function checkResults() {
         $("#userInput").children()[i].style.animation = "shake 4s";
         incorrectChars++;
         //update characters left, passing number of incorect chars
+        attemptsRemaining --;
         charactersLeft(incorrectChars);
-        return;
+        break;
       }
     }
   }
+
+  if (attemptsRemaining <= 0){
+    generateSentence();
+    charactersLeft(null);
+    attemptsRemaining = 3;
+    for (let i = ($("#userInput").children().length - 1); i >= 0; i--) {
+      $("#userInput").children()[i].remove();
+    }
+    sentence = "";
+    charactersLeft(null);
+  }
+  $("#score").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
 }
 
 

@@ -20,7 +20,7 @@ body {
   width: 50vw;
   height: 90vh;
   /* background: rgb(10, 10, 10); */
-  background: linear-gradient(rgb(0, 0, 0), rgb(15, 15, 15));
+  background: linear-gradient(to top, rgb(10, 10, 10), rgb(20, 20, 20));
   overflow: hidden;
   justify-content: center;
   align-items: center;
@@ -37,19 +37,24 @@ body {
 }
 
 #screenWrapper{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  /* display: flex; */
+  /* flex-direction: column; */
+  display: grid;
+  grid-template-rows: .5fr 1fr .25fr .25fr;
+  /* justify-content: space-between; */
   width: 90%;
   height: 40%;
   /* height: 40vh; */
   margin-bottom: 5vh;
   padding: 2%;
   /* background: rgb(127, 127, 127); */
-  background: linear-gradient(to right, rgb(127, 127, 127), rgb(100, 100, 100));
+  background: linear-gradient(to right, rgba(127, 127, 127, .6), rgba(100, 100, 100, .6)),
+  rgba(235, 246, 255, 1);
   border-radius: 15px;
-  box-shadow: inset 0px 0px 80px rgba(0, 0, 0, .9);
+  border: solid 2px black;
+  box-shadow: inset 0px 0px 80px rgba(0, 0, 0, 1);
 }
+
 #typeMe{
   width: 90%;
   font-size: 1em;
@@ -71,16 +76,35 @@ body {
   text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
   color: rgba(0, 0, 0, .6);
 }
+#score{
+  width: 90%;
+  font-size: 1em;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
+  color: rgba(0, 0, 0, .6);
+  bottom: 0;
+}
 
 .letter{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1em;
   color: rgba(0, 0, 0, .6);
-  font-size: 2em;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9);
   min-width: 2vh;
   min-height: 4vh;
+  border-radius: 5px;
+}
+
+.info{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1em;
+  color: rgba(0, 0, 0, .6);
   text-shadow: 1px 1px 5px rgba(0, 0, 0, .9);
+  min-width: 2vh;
+  min-height: 4vh;
   border-radius: 5px;
 }
 
