@@ -61,7 +61,6 @@ function typeThang(content) {
       gameStart();
 
     })
-    console.log("done!");
     return;
   }
   setTimeout(typeThang, Math.floor(Math.random() * 10), content);
@@ -126,7 +125,7 @@ function checkResults() {
         incorrectChars++;
         //update characters left, passing number of incorect chars
         charactersLeft(incorrectChars);
-        return
+        return;
       }
     }
   }
@@ -209,9 +208,10 @@ function generateSentence() {
 }
 
 function charactersLeft(incorrectChars) {
-  if (SENTENCE_LENGTH - sentence.length + incorrectChars === 1){
-    $("#lettersToType").text(`You have ${SENTENCE_LENGTH - sentence.length + incorrectChars} character left to type.`);
+  let charsLeft = SENTENCE_LENGTH - sentence.length + incorrectChars;
+  if (charsLeft === 1){
+    $("#lettersToType").text(`You have ${charsLeft} character left to type.`);
   } else {
-    $("#lettersToType").text(`You have ${SENTENCE_LENGTH - sentence.length + incorrectChars} character left to type.`);
+    $("#lettersToType").text(`You have ${charsLeft} characters left to type.`);
   }
 }
