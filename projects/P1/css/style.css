@@ -51,7 +51,7 @@ body {
   background: linear-gradient(to right, rgba(127, 127, 127, .6), rgba(100, 100, 100, .6)),
   rgba(235, 246, 255, 1);
   border-radius: 15px;
-  border: solid 2px black;
+  border: solid 2px rgb(200, 200, 175);
   box-shadow: inset 0px 0px 80px rgba(0, 0, 0, 1);
 }
 
@@ -60,6 +60,10 @@ body {
   font-size: 1em;
   text-shadow: .5px .5px 2.5px rgba(0, 0, 0, .9);
   color: rgba(0, 0, 0, .6);
+}
+
+#inputWrapper{
+  margin-top: 5%;
 }
 #userInput{
   display: flex;
@@ -70,19 +74,6 @@ body {
   max-width: 100%;
 }
 
-#lettersToType{
-  width: 90%;
-  font-size: 1em;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
-  color: rgba(0, 0, 0, .6);
-}
-#score{
-  width: 90%;
-  font-size: 1em;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, .9)
-  color: rgba(0, 0, 0, .6);
-  bottom: 0;
-}
 
 .letter{
   display: flex;
@@ -98,14 +89,15 @@ body {
 
 .info{
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   font-size: 1em;
   color: rgba(0, 0, 0, .6);
   text-shadow: 1px 1px 5px rgba(0, 0, 0, .9);
   min-width: 2vh;
   min-height: 4vh;
-  border-radius: 5px;
+  width: max-content;
+  /* border-radius: 1px; */
 }
 
 .flashingCursor{

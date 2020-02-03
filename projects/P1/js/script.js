@@ -1,5 +1,13 @@
-//Quick tutorial on handling multi key presses:
+//Quick tutorial on handling multi-key presses:
 //https://www.gavsblog.com/blog/detect-single-and-multiple-keypress-events-javascript
+//Typing sound effect:
+//http://soundbible.com/464-Typing-On-Keyboard.html
+//Ambient sound:
+//http://soundbible.com/1305-Cargo-Plane-Cabin-Ambiance.html
+//error sound:
+//http://soundbible.com/suggest.php?q=error&x=0&y=0
+//clear sound:
+//http://soundbible.com/5-Answering-Machine-Beep.html
 
 //~~~~~~~~~~put javaScript here~~~~~~~~~~~
 "use strict";
@@ -17,7 +25,14 @@ You must complete at least 5 sentences before taking a break.`
 let currentKeyboard = keyLayout;
 
 let keySFX = new Audio();
-keySFX.src = "assets/sounds/typing.wav";
+keySFX.src = "assets/sounds/typing.mp3";
+let ambiance = new Audio();
+ambiance.src = "assets/sounds/ambience.mp3";
+ambiance.loop = true;
+let error = new Audio();
+error.src = "assets/sounds/error.mp3";
+let clear = new Audio();
+clear.src = "assets/sounds/clear.mp3";
 
 let charPos = 0;
 let NON_PRINT_KEYS = 3;
@@ -35,15 +50,15 @@ $(document).ready(function() {
     JQueryUi-1.12.1: https://code.jquery.com/ui/1.12.1/jquery-ui.min.js
     Curious? drop me a line: asaperlman@gmail.com`);
   //make the keyboard
-  for (let i = 0; i < 46; i++) {
+  for (let i = 0; i < keyLayout.length; i++) {
     $("#keyboardWrapper").append(`<div id = "k${i}" class = "key"></div>`);
     $(`#k${i}`).text(keyLayout[i]);
   }
-  typeThang(welcomeMessage);
+  autoType(welcomeMessage);
 })
 
 //types out the welcome message at the beginning
-function typeThang(content) {
+function autoType(content) {
   let currentChar = content.charAt(charPos);
   if (currentChar === "\n") {
     $('#typeMe').append("<br>");
@@ -60,16 +75,18 @@ function typeThang(content) {
     $("#enterMessage").css({"animation" : "flash .5s infinite", "animation-direction" : "alternate"});
     //add a one-time event listner for keydown
     $(document).one("keydown", ()=>{
+      keySound();
       //reset charpos (for good measure)
       charPos = 0;
       //start the game
       gameStart();
+      ambiance.play();
     })
     //break out of the loop
     return;
   }
   //start the whole process again
-  setTimeout(typeThang, Math.floor(Math.random() * 10), content);
+  setTimeout(autoType, Math.floor(Math.random() * 10), content);
 }
 
 function gameStart(){
@@ -77,8 +94,10 @@ function gameStart(){
   generateSentence();
   //initiate character counter
   charactersLeft(null);
-  //initiate score counter
-  $("#score").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
+  //initiate score counter (spoiler this 'aint changing')
+  $("#score").text(`Passages Succesfully Completed: 0`);
+  //initiate attempts counter
+  $("#attempts").text(`Attempts remaining for current Passage: ${attemptsRemaining}`);
   //set listner for keydown, to the handleInput function
   $(document).on("keydown", ()=>{
     handleInput(event.key);
@@ -94,7 +113,7 @@ function handleInput(eventKey) {
     //if the key pressed (event.key) is equal to one of the allowed keys to press
     if (eventKey === currentKeyboard[i]) {
       //play the keyboard sound.
-      keySound();
+      // keySound();
       //animate the keyboard's buttons
       animateKeyboard(eventKey);
       //if the key is backspace, remove the last child of the userInput element
@@ -124,9 +143,13 @@ function handleInput(eventKey) {
 
 
 function checkResults() {
+  error.pause();
+  error.currentTime = 0;
+  error.play();
   //if player actually types it correctly, mess it up for them
   if (sentence === targetSentence) {
     sentenceMesserUpper();
+    //tak eaway an attempt
     attemptsRemaining --;
   } else {
     //else show them where their errors are
@@ -143,18 +166,28 @@ function checkResults() {
       }
     }
   }
-
   if (attemptsRemaining <= 0){
-    generateSentence();
-    charactersLeft(null);
-    attemptsRemaining = 3;
-    for (let i = ($("#userInput").children().length - 1); i >= 0; i--) {
-      $("#userInput").children()[i].remove();
-    }
-    sentence = "";
-    charactersLeft(null);
+    clear.play();
+    setTimeout(resetGame, 600);
   }
-  $("#score").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
+  $("#attempts").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
+  $("#attempts").effect("shake");
+}
+
+function resetGame(){
+  generateSentence();
+  charactersLeft(null);
+  attemptsRemaining = 3;
+  let eraseTime = 10;
+  for (let i = ($("#userInput").children().length - 1); i >= 0; i--) {
+    eraseTime += 10;
+    setTimeout(()=>{
+      $("#userInput").children()[i].remove();
+    },eraseTime);
+  }
+  sentence = "";
+  charactersLeft(null);
+  $("#attempts").text(`Attempts remaining for current Sentence: ${attemptsRemaining}`);
 }
 
 
