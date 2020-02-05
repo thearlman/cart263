@@ -1,13 +1,10 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**********************************************************
+********************* Fidgephus **************************
+**********************************************************
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~ Fidgephus ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 A therapeutic game by: ~thearlman~ Made in: Feb_2020
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Imagine, it is the year 2042. As artificial intelligence | has rendered CAPTCHA obsolete, the human race has found itself desperately in need of something to fill the moments once spent training image recognition models: enter Fidgephus. Inspired in equal measures by CAPTCHA, Fidget Spinners, and the tactile days of yore, and because idle hands are the devils workshop; Fidgephus offers infinite hours of fingerobics. ߷
