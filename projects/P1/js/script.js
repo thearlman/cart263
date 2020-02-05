@@ -17,14 +17,7 @@
 //http://soundbible.com/5-Answering-Machine-Beep.html
 
 //~~~~~~~~~~~~~~~~~~~~~In Brief~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//As Idle hands are the devils workshop; Fidgephus offers infinite
-//hours of fingerobics.
-//
-//It is the year 2042. As artificial intelligence has rendered
-//CAPTCHA, obsolete, the human race has found itself desperately in need
-//of something to fill the moments once spent training image recognition
-//models. Inspired in equal measures by CAPTCHA, Fidget Spinners, and the
-//tactile days of yore, the Fidgephus Pro was invented.
+// It is the year 2042. As artificial intelligence has rendered CAPTCHA obsolete, the human race has found itself desperately in need of something to fill the moments once spent training image recognition models: enter Fidgephus. Inspired in equal measures by CAPTCHA, Fidget Spinners, and the tactile days of yore, and because idle hands are the devils workshop; Fidgephus offers infinite hours of fingerobics.
 
 
 
@@ -263,7 +256,6 @@ function modifierCheck(eventKey) {
   //set listner for key coming back up
   $(document).one("keyup", () => {
     //remove the key-value
-    console.log("unshiftying");
     delete modifierKey[eventKey];
     //change keyboard variable back to default
     currentKeyboard = keyLayout;
