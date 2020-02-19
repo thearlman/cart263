@@ -4,6 +4,10 @@
 //Sort of by: Asa Perlman
 //But mostly by: Pippin Barr
 //
+//annyang API: https://www.talater.com/annyang/
+//responsive voice API: https://responsivevoice.org/api/
+//everypixel stock image search: https://www.everypixel.com/
+
 //~~~~~~~~In Brief~~~~~~~~~~~~
 //An educational animal exercise in backwards listening
 //Listen carefully and try to identify the animal in question
