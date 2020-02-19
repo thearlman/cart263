@@ -84,7 +84,7 @@ function newRound() {
     $("#guesses").children()[i].remove();
   }
   //add a prompt for the user to prefix their guess
-  $("#guesses").append(`<div>please say: "I think it is..."</div>`);
+  $("#guesses").append(`<div>To make a guess say: "I think it is..."</div>`);
   //iterate run a loop as many times as their are options
   for (let i = 0; i < NUM_OPTIONS; i++) {
     //assign a random animal name to a variable
@@ -196,5 +196,4 @@ let welcomeMessage = `Welcome this thing.
           You will have a coice of 5 animals.
           One of the animals will be spoken backwards.
           You must speak the name of the animal you think has been spoken.
-          If you cannot figure it out, say "I give up".
           If you get the animal correct, you will be rewarded with cute animal pics.`;
