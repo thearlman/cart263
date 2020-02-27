@@ -1,5 +1,53 @@
 body {
   margin: 0;
-  padding: 255;
+  padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+#mainWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+#question{
+  /* background: black; */
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  height: 50vh;
+  cursor: pointer;
+}
+
+.submit{
+  background: grey;
+  padding: .5vh;
+  width: max-content;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.greyedOut{
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.field{
+  margin: 5px;
+  padding:2px;
+  background: white;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 90%;
+  height: max-content;
+  font-size: 3vh;
+  user-select: none;
 }
