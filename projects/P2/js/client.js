@@ -3,28 +3,28 @@ $(document).ready(function() {
   annyang.addCallback('resultNoMatch', function(userSaid) {
     responsiveVoice.speak("I didn't understand, please repeat")
   })
-  $("#question").on("click", function() {
-    responsiveVoice.speak(currentQuestion);
-  })
-  $("#question").one("click", function(){
-    setTimeout(generatehumanShell, 4000)
+  $("#question").one("click", function() {
+    $("#question").html(`<img src="https://source.unsplash.com/400x400/?doctors,health" alt="clickbait" />
+    <p>" It's like a pressure washer for your soul"</p>`)
+    responsiveVoice.speak(welcomeMessage, 'UK English Female', {
+      onend: generateHumanShell
+    });
   });
-})
+});
 
 let humanShell;
-let classedHuman;
-let claasifiedHuman;
-let humanDefaults = [];
+let filledHuman;
 let questionPos = 0;
-let currentQuestion = "I'm going to ask you some questions.";
-// let commands = {};
+let currentQuestion = ""
+let welcomeMessage = `Doctors will hate that you have found this trick.
+I'm going to ask you some questions which will generate only the very best content for you.
+Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
 let currentQuery;
 let currentResponse;
-// let verifyCommands ={};
 let questionIndex = 0;
 let currentState = "generalQuestions";
 
-function generatehumanShell() {
+function generateHumanShell() {
   humanShell = new Human();
   annyang.start({
     autoRestart: true,
@@ -61,7 +61,7 @@ function handleQuestion(object, parameter, value, questionSet, verify) {
   let verifyCommands = {
     "yes": function(objectDotParam) {
       object[parameter] = value;
-      responsiveVoice.speak(stockReponse("positive")+ ", let's continue");
+      responsiveVoice.speak(stockReponse("positive") + ", let's continue");
       moveOn();
     },
     "no": function() {
@@ -77,22 +77,22 @@ function moveOn() {
   annyang.removeCommands();
   switch (currentState) {
     case "generalQuestions":
-      if (questionPos >= generalQuestions.length-1) {
+      if (questionPos >= generalQuestions.length - 1) {
         questionPos = 0;
-        currentState = "interestllos";
+        currentState = "interests";
         calculateClass();
       } else {
         setTimeout(queryUser, 1000, generalQuestions, generalResponses);
         questionPos++;
       }
-    break;
+      break;
     case "interests":
       console.log("DONE WITH ROUND");
       break;
   }
 }
 
-function calculateClass(){
+function calculateClass() {
   let baseScore = parseInt(humanShell.income.replace(/\$/g, ''), 10);
   let children;
   switch (humanShell.children) {
@@ -120,20 +120,23 @@ function calculateClass(){
     default:
       children = 0;
   }
-  baseScore -= (children*10);
-  if(humanShell.area === "rural"){
-    baseScore += (baseScore/10);
-  } else if (humanShell.area === "urban"){
-    baseScore -= (baseScore/10);
+  baseScore -= (children * 10);
+  if (humanShell.area === "rural") {
+    baseScore += (baseScore / 10);
+  } else if (humanShell.area === "urban") {
+    baseScore -= (baseScore / 10);
   }
-  if (baseScore < 25){
-    classedHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
-    responsiveVoice.speak(`your score is ${baseScore} you are lower class`);
-  } else if (baseScore >= 25 && baseScore < 95){
-    classedHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+  if (baseScore < 25) {
+    filledHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    responsiveVoice.speak(`your score is ${baseScore} you are lower class. That's alright, we can still find some content for you`);
+    setTimeout(function() {
+
+    })
+  } else if (baseScore >= 25 && baseScore < 95) {
+    filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     responsiveVoice.speak(`your score is ${baseScore} you are middle class`);
-  } else if (baseScore >= 95){
-    classedHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
-    responsiveVoice.speak(`your score is ${baseScore} you are upper class ${stockReponse('negative')}`);
+  } else if (baseScore >= 95) {
+    filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    responsiveVoice.speak(`your score is ${baseScore}. You are upper class, ${stockReponse('negative')}`);
   }
 }
