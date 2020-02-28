@@ -5,4 +5,5 @@ class Human {
     this.area = area;
     this.children = children;
   }
+
 }

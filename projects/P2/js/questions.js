@@ -1,38 +1,46 @@
-let generalQuestions = {
-  0: {
+let generalQuestions = [{
     spoken: "How old are you?",
     written: "How old are you? <br /> 'I am __ years old'"
   },
-  1: {
+  {
     spoken: "What is your annual income?",
-    written: "What is your annual income? <br /> 'I make __ dollars a year'"
+    written: "What is your annual income? <br /> 'I make __ dollars per year'"
   },
-  2: {
-    spoken: "What kind of area do you live in?",
-    written: "What kind of area do you live in? <br /> 'I live in a __ area'"
+  {
+    spoken: "What kind of area do you live in? Urban or rural?",
+    written: "What kind of area do you live in? Urban or rural? <br /> 'I live in a (urban/ rural) area'"
   },
-  3: {
+  {
     spoken: "how many children do you have?",
     written: "how many children do you have? <br /> 'I have __ children'"
   }
-}
+]
 
-let generalResponses = {
-  0: {
-    query: "I am *value years old",
+let generalResponses = [{
+    query: "I am (I'm) (is) *value years old",
+    response: function(value) {
+      let verify = `did you say you were ${value} years old?`;
+      handleQuestion(emptyHuman, "age", value, generalQuestions, verify);
+    }
+  },
+  {
+    query: "I make *value per year",
+    response: function(value) {
+      let verify = `did you say you make ${value} per year?`;
+      handleQuestion(emptyHuman, "income", value, generalQuestions, verify);
+    }
+  },
+  {
+    query: "I live in (a)(an) *value area",
+    response: function(value) {
+      let verify = `did you say you live in a ${value} area?`
+      handleQuestion(emptyHuman, "area", value, generalQuestions, verify);
+    }
+  },
+  { query: "I have *value children",
     response: function(value){
-      responsiveVoice.speak(`did you say you were ${value} years old?`);
-      commands["yes"] = function() {
-        addValue(value, "emptyHuman", "age");
-        console.log("ADDED THE SHIT");
-      }
-      }
-    },
-  1: "I make :value dollars a year",
-  2: "I live in a :value area",
-  3: "I have :value children"
-}
-
-function addValue(value, object, parameter){
-  object.parameter = value;
-}
+      let verify = `did you say you have ${value} children?`
+      handleQuestion(emptyHuman, "children", value, generalQuestions, verify);
+    }
+  }
+]
