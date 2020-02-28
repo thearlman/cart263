@@ -1,7 +1,7 @@
 class Middle extends Human {
   constructor(age, income, area, children) {
     super(age, income, area, children);
-    interests = {
+    this.interests = {
       television: [],
       movies: [],
       food: [],

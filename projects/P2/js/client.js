@@ -7,11 +7,12 @@ $(document).ready(function() {
     responsiveVoice.speak(currentQuestion);
   })
   $("#question").one("click", function(){
-    setTimeout(generateEmptyHuman, 4000)
+    setTimeout(generatehumanShell, 4000)
   });
 })
 
-let emptyHuman;
+let humanShell;
+let classedHuman;
 let claasifiedHuman;
 let humanDefaults = [];
 let questionPos = 0;
@@ -23,8 +24,8 @@ let currentResponse;
 let questionIndex = 0;
 let currentState = "generalQuestions";
 
-function generateEmptyHuman() {
-  emptyHuman = new Human();
+function generatehumanShell() {
+  humanShell = new Human();
   annyang.start({
     autoRestart: true,
     continuous: true
@@ -32,6 +33,8 @@ function generateEmptyHuman() {
   // annyang.debug(true);
   queryUser(generalQuestions, generalResponses);
 }
+
+
 
 //function to establish of which class the human will be
 function queryUser(questionIndex, responseIndex) {
@@ -58,11 +61,12 @@ function handleQuestion(object, parameter, value, questionSet, verify) {
   let verifyCommands = {
     "yes": function(objectDotParam) {
       object[parameter] = value;
+      responsiveVoice.speak(stockReponse("positive")+ ", let's continue");
       moveOn();
     },
     "no": function() {
-      responsiveVoice.speak("Alright, let's try again");
-      responsiveVoice.speak(questionSet[questionPos]["spoken"])
+      responsiveVoice.speak(stockReponse("negative") + ", let's try again");
+      responsiveVoice.speak(questionSet[questionPos]["spoken"]);
     }
   }
   annyang.addCommands(verifyCommands);
@@ -73,18 +77,63 @@ function moveOn() {
   annyang.removeCommands();
   switch (currentState) {
     case "generalQuestions":
-      if (questionPos >= generalQuestions.length) {
+      if (questionPos >= generalQuestions.length-1) {
         questionPos = 0;
-        currentState = "interests";
-        queryUser(interestQuestions, interestResponses)
+        currentState = "interestllos";
+        calculateClass();
       } else {
-        responsiveVoice.speak("Alright, let's move on");
-        setTimeout(queryUser, 3000, generalQuestions, generalResponses);
+        setTimeout(queryUser, 1000, generalQuestions, generalResponses);
         questionPos++;
       }
     break;
     case "interests":
       console.log("DONE WITH ROUND");
       break;
+  }
+}
+
+function calculateClass(){
+  let baseScore = parseInt(humanShell.income.replace(/\$/g, ''), 10);
+  let children;
+  switch (humanShell.children) {
+    case "no":
+      children = 0;
+      break;
+    case "zero":
+      children = 0;
+      break;
+    case "one":
+      children = 1;
+      break;
+    case "two":
+      children = 2;
+      break;
+    case "three":
+      children = 3;
+      break;
+    case "four":
+      children = 4;
+      break;
+    case "five":
+      children = 5;
+      break;
+    default:
+      children = 0;
+  }
+  baseScore -= (children*10);
+  if(humanShell.area === "rural"){
+    baseScore += (baseScore/10);
+  } else if (humanShell.area === "urban"){
+    baseScore -= (baseScore/10);
+  }
+  if (baseScore < 25){
+    classedHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    responsiveVoice.speak(`your score is ${baseScore} you are lower class`);
+  } else if (baseScore >= 25 && baseScore < 95){
+    classedHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    responsiveVoice.speak(`your score is ${baseScore} you are middle class`);
+  } else if (baseScore >= 95){
+    classedHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    responsiveVoice.speak(`your score is ${baseScore} you are upper class ${stockReponse('negative')}`);
   }
 }
