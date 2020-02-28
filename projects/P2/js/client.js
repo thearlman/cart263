@@ -10,6 +10,16 @@ $(document).ready(function() {
       onend: generateHumanShell
     });
   });
+  $("#question").one("tap", function() {
+    $("#question").html(`<img src="https://source.unsplash.com/400x400/?doctors,health" alt="clickbait" />
+    <p>" It's like a pressure washer for your soul"</p>`)
+    responsiveVoice.speak(welcomeMessage, 'UK English Female', {
+      onend: generateHumanShell
+    });
+  });
+
+
+
 });
 
 let humanShell;
