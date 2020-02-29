@@ -3,16 +3,16 @@ class Upper extends Human {
     super(age, income, area, children);
     this.status = "upper class";
     this.interests = {
-      television: [],
-      movies: [],
-      food: [],
-      books: [],
-      podcasts: [],
-      music: [],
-      art: [],
-      theatre: [],
-      opera: [],
-      composers: [],
+      television: "",
+      movie: "",
+      food: "",
+      music: "",
+      book: "",
+      podcast: "",
+      art: "",
+      theatre: "",
+      opera: "",
+      composer: "",
     };
   }
 }
