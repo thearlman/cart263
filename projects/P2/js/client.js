@@ -146,18 +146,21 @@ function calculateClass() {
   if (baseScore < 25) {
     filledHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
+    $("#question").html(`<img src="https://source.unsplash.com/400x400/?sad,poor" alt="clickbait" /> <p>I make more than $5000 a week from home.</p>`);
     responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are lower class. That's alright, we can still find some content for you`, voiceType, {
       onend: moveOn
     });
   } else if (baseScore >= 25 && baseScore < 95) {
     filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
+    $("#question").html(`<img src="https://source.unsplash.com/400x400/?working,suburban" alt="clickbait" /> <p>Genuine raybans $25.</p>`);
     responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
   } else if (baseScore >= 95) {
     filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
+    $("#question").html(`<img src="https://source.unsplash.com/400x400/?rich,yaught" alt="clickbait" /> <p>This investment changed my life. But I dont tell just everyone about it...</p>`)
     responsiveVoice.speak(`your score is ${baseScore} you upper class ${stockReponse('negative')}`, voiceType, {
       onend: moveOn
     });
