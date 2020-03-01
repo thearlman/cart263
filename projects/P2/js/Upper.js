@@ -12,7 +12,7 @@ class Upper extends Human {
       art: "",
       theatre: "",
       opera: "",
-      composer: "",
+      composer: ""
     };
   }
 }

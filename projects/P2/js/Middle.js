@@ -6,9 +6,9 @@ class Middle extends Human {
       television: "",
       movie: "",
       food: "",
-      books: "",
-      podcast: "",
       music: "",
+      book: "",
+      podcast: "",
       art: ""
     };
   }
