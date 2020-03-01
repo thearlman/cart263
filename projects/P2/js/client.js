@@ -1,3 +1,8 @@
+//tutorial on using youtube data API:
+//https://dev.to/aveb/making-your-first-get-request-to-youtube-search-api-4c2f
+
+
+
 $(document).ready(function() {
   console.log("jquery activated");
   annyang.addCallback('resultNoMatch', function(userSaid) {
@@ -16,16 +21,17 @@ let humanShell;
 let filledHuman;
 let questionPos = 0;
 let currentQuestion = ""
-// let welcomeMessage = `Doctors will hate that you have found this trick.
-// I'm going to ask you some questions which will generate only the very best content for you.
-// Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
-let welcomeMessage = `Doctors`;
+let welcomeMessage = `Doctors will hate that you have found this trick.
+I'm going to ask you some questions which will generate only the very best content for you.
+Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
+// let welcomeMessage = `Doctors`;
 let currentQuery;
 let currentResponse;
 // let questionIndex = 0;
 let currentState = "generalQuestions";
 let stockResponsesPositive = ["brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
 let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss", ];
+let searchTerms = "";
 
 function generateHumanShell() {
   humanShell = new Human();
@@ -65,6 +71,7 @@ function handleQuestion(object, parameter, value, questionSet, verify) {
     "yes": function() {
       questionPos++;
       object[parameter] = value;
+      console.log(filledHuman);
       responsiveVoice.speak(stockReponse("positive") + ", let's continue", voiceType, {
         onend: moveOn
       });
@@ -90,10 +97,11 @@ function moveOn() {
       }
       break;
     case "interests":
-      if (questionPos > Object.keys(filledHuman["interests"]).length -1) {
+      if (questionPos > Object.keys(filledHuman["interests"]).length - 1) {
         questionPos = 0;
-        responsiveVoice.speak("alright we're done here");
-        endGame();
+        responsiveVoice.speak(`${stockReponse("positive")}, let me pull up your idealized content`, voiceType, {
+          onend: parseInterests
+        });
       } else {
         setTimeout(queryUser, 1000, interestQuestions, interestResponses);
       }
@@ -165,6 +173,49 @@ function stockReponse(sentiment) {
   }
 }
 
-function endGame() {
-  console.log("GAME OVER");
+function parseInterests() {
+  for (let i = 0; i < Object.keys(filledHuman["interests"]).length; i++) {
+    let interest = Object.keys(filledHuman["interests"])[i];
+    console.log(interest);
+    searchTerms += " " + filledHuman["interests"][interest];
+  }
+  searchTerms = searchTerms.replace(/ /g, "|");
+  getPerfectVideo(searchTerms);
 }
+
+
+function getPerfectVideo(searchTerms) {
+  $.ajax({
+    type: 'GET',
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    data: {
+      key: 'AIzaSyCngQirz4XR89tDgmxSZIJWOa3cKHMUwfw',
+      q: searchTerms,
+      part: 'snippet',
+      maxResults: 10,
+      type: 'video',
+      videoEmbeddable: true,
+    },
+    success: function(data) {
+      console.log(data)
+      if (data["items"].length > 0) {
+        let randInt = Math.floor(Math.random() * data["items"].length);
+        let randVidId = data["items"][randInt]["id"]["videoId"]
+        // deliverContent("http://www.youtube.com/embed/${randVidId}?autoplay=1");
+        $("#question").html(`<iframe src="http://www.youtube.com/embed/${randVidId}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
+      } else {
+        console.log("no results found");
+      }
+    },
+    error: function(response) {
+      console.log("Request Failed");
+    }
+  });
+}
+
+// function deliverContent(vidUrl){
+//   $("#question").html(`<img src="https://source.unsplash.com/400x400/?content,rich," alt="clickbait"
+//   <p>How old are you?</p>`)
+// }
+
+// getPerfectVideo(searchTerms);

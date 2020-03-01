@@ -3,13 +3,13 @@ class Middle extends Human {
     super(age, income, area, children);
     this.status = "middle class";
     this.interests = {
-      television: [],
-      movies: [],
-      food: [],
-      books: [],
-      podcasts: [],
-      music: [],
-      art: []
+      television: "",
+      movie: "",
+      food: "",
+      books: "",
+      podcast: "",
+      music: "",
+      art: ""
     };
   }
 }

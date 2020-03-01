@@ -3,10 +3,10 @@ class Lower extends Human {
     super(age, income, area, children);
     this.status = "lower class";
     this.interests = {
-      television: [],
-      movies: [],
-      food: [],
-      music: []
+      television: "",
+      movie: "",
+      food: "",
+      music: ""
     };
   }
 }
