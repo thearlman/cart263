@@ -29,12 +29,6 @@ let interestQuestions = [{
       <p>Please Answer: "My favourite genre of literature is __ "</p>`
   },
   {
-    spoken: "and what is your favourite podcast?",
-    written: `<img src="https://source.unsplash.com/400x400/?radio,podcast" alt="clickbait" />
-      <p>What is your favourite podcast?</p>
-      <p>Please Answer: "My favourite podcast is __ "</p>`
-  },
-  {
     spoken: "and who is your favourite artist?",
     written: `<img src="https://source.unsplash.com/400x400/?art, artistic" alt="clickbait" />
       <p>Who is your favourite artist?</p>
@@ -94,13 +88,6 @@ let interestResponses = [{
     response: function(value) {
       let verify = `did you say your favourite genre of literature is ${value}?`;
       handleQuestion(filledHuman['interests'], "book", value, interestQuestions, verify);
-    }
-  },
-  {
-    query: "My favourite podcast is *value",
-    response: function(value) {
-      let verify = `did you say your favourite podcast is ${value}?`;
-      handleQuestion(filledHuman['interests'], "podcast", value, interestQuestions, verify);
     }
   },
   {

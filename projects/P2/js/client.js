@@ -10,7 +10,7 @@ $(document).ready(function() {
   })
   $("#question").one("click", function() {
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?doctors,health" alt="clickbait" />
-    <p>" It's like a pressure washer for your soul"</p>`)
+    <p>" It's like a pressure washer for your soul"</p><br />-Doctor`)
     responsiveVoice.speak(welcomeMessage, voiceType, {
       onend: generateHumanShell
     });
@@ -178,8 +178,7 @@ function parseInterests() {
     let interest = Object.keys(filledHuman["interests"])[i];
     console.log(interest);
     searchTerms += " " + filledHuman["interests"][interest];
-  }sitive information. Once you have pushed sensitive information to GitHub, this information is public and should be considered compromised.
-Accidents happened to the best of us and will continue to happen. Sign up to our servic
+  }
   searchTerms = searchTerms.replace(/ /g, "|");
   getPerfectVideo(searchTerms);
 }

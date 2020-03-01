@@ -8,7 +8,6 @@ class Upper extends Human {
       food: "",
       music: "",
       book: "",
-      podcast: "",
       art: "",
       theatre: "",
       opera: "",

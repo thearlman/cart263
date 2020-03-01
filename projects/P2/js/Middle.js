@@ -8,7 +8,6 @@ class Middle extends Human {
       food: "",
       music: "",
       book: "",
-      podcast: "",
       art: ""
     };
   }
