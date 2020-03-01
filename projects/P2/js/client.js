@@ -152,7 +152,7 @@ function calculateClass() {
   } else if (baseScore >= 25 && baseScore < 95) {
     filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
-    responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are middle class, keep it up.`, voiceType, {
+    responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
   } else if (baseScore >= 95) {
@@ -178,7 +178,8 @@ function parseInterests() {
     let interest = Object.keys(filledHuman["interests"])[i];
     console.log(interest);
     searchTerms += " " + filledHuman["interests"][interest];
-  }
+  }sitive information. Once you have pushed sensitive information to GitHub, this information is public and should be considered compromised.
+Accidents happened to the best of us and will continue to happen. Sign up to our servic
   searchTerms = searchTerms.replace(/ /g, "|");
   getPerfectVideo(searchTerms);
 }
@@ -202,7 +203,7 @@ function getPerfectVideo(searchTerms) {
         let randInt = Math.floor(Math.random() * data["items"].length);
         let randVidId = data["items"][randInt]["id"]["videoId"]
         // deliverContent("http://www.youtube.com/embed/${randVidId}?autoplay=1");
-        $("#question").html(`<iframe src="http://www.youtube.com/embed/${randVidId}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
+        $("#question").html(`<iframe src="https://www.youtube.com/embed/${randVidId}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
       } else {
         console.log("no results found");
       }
