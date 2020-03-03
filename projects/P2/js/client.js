@@ -196,6 +196,7 @@ function getPerfectVideo(searchTerms) {
     type: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
+      key : 'AIzaSyBQmt4CDtxN_5ttVOgVMCRG5gi5C1squos',
       q: searchTerms,
       part: 'snippet',
       maxResults: 10,
@@ -206,9 +207,9 @@ function getPerfectVideo(searchTerms) {
       console.log(data)
       if (data["items"].length > 0) {
         let randInt = Math.floor(Math.random() * data["items"].length);
-        let randVidId = data["items"][randInt]["id"]["videoId"]
-        deliverContent("http://www.youtube.com/embed/${randVidId}?autoplay=1");
-        filledHuman.consumeContent(randVid);
+        let randVidId = data["items"][randInt]["id"]["videoId"];
+        console.log(randVidId);
+        filledHuman.consumeContent(randVidId);
       } else {
         console.log("no results found");
       }
@@ -218,10 +219,3 @@ function getPerfectVideo(searchTerms) {
     }
   });
 }
-
-// function deliverContent(vidUrl){
-//   $("#question").html(`<img src="https://source.unsplash.com/400x400/?content,rich," alt="clickbait"
-//   <p>How old are you?</p>`)
-// }
-
-// getPerfectVideo(searchTerms);
