@@ -10,7 +10,7 @@ $(document).ready(function() {
   })
   $("#question").one("click", function() {
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?doctors,health" alt="clickbait" />
-    <p>" It's like a pressure washer for your soul"</p><br />-Doctor`)
+    <p>"It's like a pressure washer for your soul"</p><br />-US Doctor`)
     responsiveVoice.speak(welcomeMessage, voiceType, {
       onend: generateHumanShell
     });
@@ -21,15 +21,15 @@ let humanShell;
 let filledHuman;
 let questionPos = 0;
 let currentQuestion = ""
-let welcomeMessage = `Doctors will hate that you have found this trick.
-I'm going to ask you some questions which will generate only the very best content for you.
-Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
-// let welcomeMessage = `Doctors`;
+// let welcomeMessage = `Doctors will hate that you have found this trick.
+// I'm going to ask you some questions which will generate only the very best content for you.
+// Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
+let welcomeMessage = `Doctors`;
 let currentQuery;
 let currentResponse;
 // let questionIndex = 0;
 let currentState = "generalQuestions";
-let stockResponsesPositive = ["brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
+let stockResponsesPositive = ["jolly good","brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
 let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss", ];
 let searchTerms = "";
 
@@ -111,6 +111,7 @@ function moveOn() {
 
 function calculateClass() {
   let baseScore = parseInt(humanShell.income.replace(/\$/g, ''), 10);
+  console.log(baseScore);
   // let children;
   switch (humanShell.children) {
     case "no":
@@ -164,6 +165,8 @@ function calculateClass() {
     responsiveVoice.speak(`your score is ${baseScore} you upper class ${stockReponse('negative')}`, voiceType, {
       onend: moveOn
     });
+  }else{
+    console.log("Somethign Fucked up");
   }
 }
 
@@ -192,7 +195,7 @@ function getPerfectVideo(searchTerms) {
     type: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
-      key: 'AIzaSyCngQirz4XR89tDgmxSZIJWOa3cKHMUwfw',
+      // key: 'AIzaSyAU5Ai_CiUrJ-B0x9XrAmsK7HyNlm1CEbo',
       q: searchTerms,
       part: 'snippet',
       maxResults: 10,
@@ -204,8 +207,8 @@ function getPerfectVideo(searchTerms) {
       if (data["items"].length > 0) {
         let randInt = Math.floor(Math.random() * data["items"].length);
         let randVidId = data["items"][randInt]["id"]["videoId"]
-        // deliverContent("http://www.youtube.com/embed/${randVidId}?autoplay=1");
-        $("#question").html(`<iframe src="https://www.youtube.com/embed/${randVidId}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
+        deliverContent("http://www.youtube.com/embed/${randVidId}?autoplay=1");
+        filledHuman.consumeContent(randVid);
       } else {
         console.log("no results found");
       }
