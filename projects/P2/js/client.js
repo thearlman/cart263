@@ -2,38 +2,56 @@
 //https://dev.to/aveb/making-your-first-get-request-to-youtube-search-api-4c2f
 
 
-
+//wait for document to finish loading
 $(document).ready(function() {
-  console.log("UDATED");
   console.log("jquery activated");
+  //set a callback to ask the user to repeat what they said if it doesn't match one of annyang's input commands
   annyang.addCallback('resultNoMatch', function(userSaid) {
     responsiveVoice.speak("I didn't understand, please repeat")
   })
+  //set a one-time listener to start the game after clicking the image
   $("#question").one("click", function() {
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?doctors,health" alt="clickbait" />
     <p>"It's like a pressure washer for your soul"</p><br />-US Doctor`)
+    //read out the welcome message, and fire a function when complete
     responsiveVoice.speak(welcomeMessage, voiceType, {
       onend: generateHumanShell
     });
   });
 });
+//~~~some variablezzz
+//the type of voice we will be using
 let voiceType = 'UK English Female';
+//the empty human, or rather at this stage, the idea of an empty human
 let humanShell;
+//same as above, but of the filled variety
 let filledHuman;
+// what position we are in for the line of questioning
 let questionPos = 0;
+// variable to hold the current question
 let currentQuestion = ""
+// sketchy welcome message
 let welcomeMessage = `Doctors will hate that you have found this trick.
 I'm going to ask you some questions which will generate only the very best content for you.
 Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
 // let welcomeMessage = `Doctors`;
+// the current query
 let currentQuery;
+//and is corresponing response
 let currentResponse;
-// let questionIndex = 0;
+//the current State of the game (this made more sense when I thought I would have mroe stages)
 let currentState = "generalQuestions";
+// some stock positive responses for the bot to keep things a little more humaine
 let stockResponsesPositive = ["jolly good","brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
+// and some begative ones as well
 let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss", ];
+//this will hold the search terms to be used at the end
 let searchTerms = "";
 
+
+//generate the shell of a human
+//
+// we all start out as a shell,
 function generateHumanShell() {
   humanShell = new Human();
   annyang.start({
@@ -154,14 +172,14 @@ function calculateClass() {
       onend: moveOn
     });
   } else if (baseScore >= 25000 && baseScore < 95000) {
-    filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children, humanShell.aspiration);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?working,suburban" alt="clickbait" /> <p>Genuine raybans $25.</p>`);
     responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
   } else if (baseScore >= 95000) {
-    filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
+    filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children, humanShell.aspiration);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?rich,yaught" alt="clickbait" /> <p>This investment changed my life. But I dont tell just everyone about it...</p>`)
     responsiveVoice.speak(`your score is ${baseScore} you upper class ${stockReponse('negative')}`, voiceType, {
@@ -186,6 +204,9 @@ function parseInterests() {
     let interest = Object.keys(filledHuman["interests"])[i];
     console.log(interest);
     searchTerms += " " + filledHuman["interests"][interest];
+  }
+  if (filledHuman instanceof Upper || filledHuman instanceof Middle){
+    searchTerms += filledHuman.aspiration;
   }
   searchTerms = searchTerms.replace(/ /g, "|");
   getPerfectVideo(searchTerms);

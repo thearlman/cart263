@@ -1,12 +1,11 @@
 class Lower extends Human {
-  constructor(age, income, area, children) {
-    super(age, income, area, children);
-    this.status = "lower class";
+  constructor(age, income, area, children, aspiration) {
+    super(age, income, area, children, aspiration);
     this.interests = {
       television: "",
-      // movie: "",
-      // food: "",
-      // music: ""
+      movie: "",
+      food: "",
+      music: ""
     };
   }
   consumeContent(interests){

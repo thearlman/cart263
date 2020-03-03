@@ -40,6 +40,12 @@ let generalQuestions = [{
     written: `<img src="https://source.unsplash.com/400x400/?children,parenthood" alt="clickbait" />
     <p>how many offspring do you have?</p>
     <p>'Please Answer: I have __offspring'</p>`
+  },
+  {
+    spoken: "What did you want to be when you grew up?",
+    written: `<img src="https://source.unsplash.com/400x400/?child,wonder" alt="clickbait" />
+    <p>What did you want to be when you grew up?</p>
+    <p>'Please Answer: When I grew up I wanted to be __'</p>`
   }
 ]
 
@@ -68,6 +74,12 @@ let generalResponses = [{
     response: function(value){
       let verify = `did you say you have ${value} offspring?`
       handleQuestion(humanShell, "children", value, generalQuestions, verify);
+    }
+  },
+  { query: "when I grew up I wanted to be *value",
+    response: function(value){
+      let verify = `hahaha, did you say you wanted to be ${value} when you grew up?`
+      handleQuestion(humanShell, "aspiration", value, generalQuestions, verify);
     }
   }
 ]
