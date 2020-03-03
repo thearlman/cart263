@@ -1,4 +1,5 @@
-class Human {
+
+class HumanShell {
   constructor(age, income, area, children, aspiration) {
     this.age = age;
     this.income = income;
@@ -6,5 +7,4 @@ class Human {
     this.children = children;
     this.aspiration = aspiration;
   }
-
 }

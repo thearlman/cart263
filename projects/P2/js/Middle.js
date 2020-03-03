@@ -1,4 +1,4 @@
-class Middle extends Human {
+class Middle extends HumanShell {
   constructor(age, income, area, children, aspiration) {
     super(age, income, area, children, aspiration);
     this.interests = {

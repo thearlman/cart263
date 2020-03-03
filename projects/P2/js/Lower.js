@@ -1,4 +1,4 @@
-class Lower extends Human {
+class Lower extends HumanShell {
   constructor(age, income, area, children, aspiration) {
     super(age, income, area, children, aspiration);
     this.interests = {
