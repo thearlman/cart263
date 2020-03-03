@@ -22,10 +22,10 @@ let humanShell;
 let filledHuman;
 let questionPos = 0;
 let currentQuestion = ""
-// let welcomeMessage = `Doctors will hate that you have found this trick.
-// I'm going to ask you some questions which will generate only the very best content for you.
-// Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
-let welcomeMessage = `Doctors`;
+let welcomeMessage = `Doctors will hate that you have found this trick.
+I'm going to ask you some questions which will generate only the very best content for you.
+Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
+// let welcomeMessage = `Doctors`;
 let currentQuery;
 let currentResponse;
 // let questionIndex = 0;
