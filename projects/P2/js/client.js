@@ -111,7 +111,8 @@ function moveOn() {
 }
 
 function calculateClass() {
-  let baseScore = parseInt(humanShell.income.replace(/\$/g, ''), 10);
+  let baseScore = humanShell.income.replace(/\$|,/g, '')
+  baseScore = parseInt(baseScore, 10);
   console.log(baseScore);
   // let children;
   switch (humanShell.children) {
@@ -145,21 +146,21 @@ function calculateClass() {
   } else if (humanShell.area === "urban") {
     baseScore -= (baseScore / 10);
   }
-  if (baseScore < 25) {
+  if (baseScore < 25000) {
     filledHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?sad,poor" alt="clickbait" /> <p>I make more than $5000 a week from home.</p>`);
     responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are lower class. That's alright, we can still find some content for you`, voiceType, {
       onend: moveOn
     });
-  } else if (baseScore >= 25 && baseScore < 95) {
+  } else if (baseScore >= 25000 && baseScore < 95000) {
     filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?working,suburban" alt="clickbait" /> <p>Genuine raybans $25.</p>`);
     responsiveVoice.speak(`${stockReponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
-  } else if (baseScore >= 95) {
+  } else if (baseScore >= 95000) {
     filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?rich,yaught" alt="clickbait" /> <p>This investment changed my life. But I dont tell just everyone about it...</p>`)
