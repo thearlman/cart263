@@ -6,7 +6,7 @@ let interestQuestions = [{
   },
   {
     spoken: "and what is your favourite movie?",
-    written: `<img src="https://source.unsplash.com/400x400/?movies,hollywood" alt="clickbait" />
+    written: `<img src="https://source.unsplash.com/400x400/?movies,cinema" alt="clickbait" />
       <p>What is your favourite movie?</p>
       <p>Please Answer: "My favourite movie is __ "</p>`
   },
@@ -59,63 +59,63 @@ let interestResponses = [{
     query: "My favourite TV show is *value",
     response: function(value) {
       let verify = `did you say your favourite tv show is ${value}?`;
-      handleQuestion(filledHuman['interests'], "television", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "television", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite movie is *value",
     response: function(value) {
       let verify = `did you say your favourite movie is ${value}?`;
-      handleQuestion(filledHuman['interests'], "movie", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "movie", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite kind of food is *value",
     response: function(value) {
       let verify = `did you say your favourite kind of food is ${value}?`;
-      handleQuestion(filledHuman['interests'], "food", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "food", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite genre of music is *value",
     response: function(value) {
       let verify = `did you say your favourite genre of music is ${value}?`;
-      handleQuestion(filledHuman['interests'], "music", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "music", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite genre of literature is *value",
     response: function(value) {
       let verify = `did you say your favourite genre of literature is ${value}?`;
-      handleQuestion(filledHuman['interests'], "book", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "book", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite artist is *value",
     response: function(value) {
       let verify = `did you say your favourite artist is ${value}?`;
-      handleQuestion(filledHuman['interests'], "art", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "art", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite play is *value",
     response: function(value) {
       let verify = `did you say your favourite play is ${value}?`;
-      handleQuestion(filledHuman['interests'], "theatre", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "theatre", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite opera is *value",
     response: function(value) {
       let verify = `did you say your favourite opera is ${value}?`;
-      handleQuestion(filledHuman['interests'], "opera", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "opera", value, interestQuestions, verify);
     }
   },
   {
     query: "My favourite composer is *value",
     response: function(value) {
       let verify = `did you say your favourite composer is ${value}?`;
-      handleQuestion(filledHuman['interests'], "composer", value, interestQuestions, verify);
+      handleQuestion(user['interests'], "composer", value, interestQuestions, verify);
     }
   },
 

@@ -1,6 +1,6 @@
 class Middle extends HumanShell {
-  constructor(age, income, area, children, aspiration) {
-    super(age, income, area, children, aspiration);
+  constructor(name, age, income, area, children, aspiration) {
+    super(name, age, income, area, children, aspiration);
     this.interests = {
       television: "",
       movie: "",

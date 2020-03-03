@@ -18,6 +18,12 @@
 // ]
 
 let generalQuestions = [{
+    spoken: "What is your name?",
+    written: `<img src="https://source.unsplash.com/400x400/?handshake,name" alt="clickbait" />
+    <p>What is your name?</p>
+    <p>'Please Answer: My name is __'</p>`
+  },
+  {
     spoken: "How old are you?",
     written: `<img src="https://source.unsplash.com/400x400/?birthday,age" alt="clickbait" />
     <p>How old are you?</p>
@@ -50,36 +56,45 @@ let generalQuestions = [{
 ]
 
 let generalResponses = [{
+    query: "my name is *value",
+    response: function(value) {
+      let verify = `did you say your name was ${value}?`;
+      handleQuestion(user, "name", value, generalQuestions, verify);
+    }
+  },
+  {
     query: "I am (I'm) (is) *value years old",
     response: function(value) {
       let verify = `did you say you were ${value} years old?`;
-      handleQuestion(humanShell, "age", value, generalQuestions, verify);
+      handleQuestion(user, "age", value, generalQuestions, verify);
     }
   },
   {
     query: "I make *value per year",
     response: function(value) {
       let verify = `did you say you make ${value} per year?`;
-      handleQuestion(humanShell, "income", value, generalQuestions, verify);
+      handleQuestion(user, "income", value, generalQuestions, verify);
     }
   },
   {
     query: "I live in a more *value area",
     response: function(value) {
       let verify = `did you say you live in a more ${value} area?`
-      handleQuestion(humanShell, "area", value, generalQuestions, verify);
+      handleQuestion(user, "area", value, generalQuestions, verify);
     }
   },
-  { query: "I have *value offspring",
-    response: function(value){
+  {
+    query: "I have *value offspring",
+    response: function(value) {
       let verify = `did you say you have ${value} offspring?`
-      handleQuestion(humanShell, "children", value, generalQuestions, verify);
+      handleQuestion(user, "children", value, generalQuestions, verify);
     }
   },
-  { query: "when I grew up I wanted to be *value",
-    response: function(value){
+  {
+    query: "when I grew up I wanted to be *value",
+    response: function(value) {
       let verify = `hahaha, did you say you wanted to be ${value} when you grew up?`
-      handleQuestion(humanShell, "aspiration", value, generalQuestions, verify);
+      handleQuestion(user, "aspiration", value, generalQuestions, verify);
     }
   }
 ]

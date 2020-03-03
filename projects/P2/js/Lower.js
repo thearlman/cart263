@@ -1,6 +1,6 @@
 class Lower extends HumanShell {
-  constructor(age, income, area, children, aspiration) {
-    super(age, income, area, children, aspiration);
+  constructor(name, age, income, area, children, aspiration) {
+    super(name, age, income, area, children, aspiration);
     this.interests = {
       television: "",
       movie: "",
@@ -9,6 +9,9 @@ class Lower extends HumanShell {
     };
   }
   consumeContent(interests){
+    setInterval(function(){
+      alert(`${this.name}, ${annoyingAdThing[Math.floor(Math.random()*annoyingAdThing.length)]}`)
+    }, 5000);
     $("#question").html(`<iframe src="https://www.youtube.com/embed/${interests}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
   }
 }

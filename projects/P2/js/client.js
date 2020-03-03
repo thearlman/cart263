@@ -4,6 +4,7 @@
 
 //wait for document to finish loading
 $(document).ready(function() {
+  console.log("UPDATEDDDD");
   console.log("jquery activated");
   //set a callback to ask the user to repeat what they said if it doesn't match one of annyang's input commands
   annyang.addCallback('resultNoMatch', function(userSaid) {
@@ -26,15 +27,16 @@ let voiceType = 'UK English Female';
 let humanShell;
 //same as above, but of the filled variety
 let filledHuman;
+let user;
 // what position we are in for the line of questioning
 let questionPos = 0;
 // variable to hold the current question
 let currentQuestion = ""
 // sketchy welcome message
-let welcomeMessage = `Doctors will hate that you have found this trick.
-I'm going to ask you some questions which will generate only the very best content for you.
-Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
-// let welcomeMessage = `Doctors`;
+// let welcomeMessage = `Doctors will hate that you have found this trick.
+// I'm going to ask you some questions which will generate only the very best content for you.
+// Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
+let welcomeMessage = `Doctors`;
 // the current query
 let currentQuery;
 //and is corresponing response
@@ -45,6 +47,7 @@ let currentState = "generalQuestions";
 let stockResponsesPositive = ["jolly good", "brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
 // and some begative ones as well
 let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss", ];
+let annoyingAdThing = ["don't wait to let your life begin", "listen to your gut", "50% off all bullshit"];
 //this will hold the search terms to be used at the end
 let searchTerms = "";
 
@@ -67,7 +70,7 @@ function stockResponse(sentiment) {
 // we all start out as a shell
 function generateHumanShell() {
   //create an instance of human
-  humanShell = new HumanShell();
+  user = new HumanShell();
   // activate annyang, prompting user to allow access to microphone
   annyang.start({
     autoRestart: true,
@@ -117,14 +120,14 @@ function handleQuestion(object, parameter, value, questionSet, verify) {
       // push the user's input to the appropriate parameter of the human object
       object[parameter] = value;
       // let the user know their response has been recorded, and when finished, run the moveOn function
-      responsiveVoice.speak(stockResponse("positive") + ", let's continue", voiceType, {
+      responsiveVoice.speak(`${stockResponse("positive")} ${user.name}, let's continue`, voiceType, {
         onend: moveOn
       });
     },
     // if user andswers no:
     "no": function() {
       // let them know we got it, (with some negative reinforcment)
-      responsiveVoice.speak(stockResponse("negative") + ", let's try again");
+      responsiveVoice.speak(`${stockResponse("negative")} ${user.name}, let's try again`);
       //repeat the question
       responsiveVoice.speak(questionSet[questionPos]["spoken"]);
     }
@@ -161,7 +164,7 @@ function moveOn() {
     case "interests":
       // first check to see if we have asked about all of the things the object (human)
       //is interested in
-      if (questionPos > Object.keys(filledHuman["interests"]).length - 1) {
+      if (questionPos > Object.keys(user["interests"]).length - 1) {
         // if so, reset the question index
         questionPos = 0;
         // let the user know we have reached the end, and we will be finding them some content
@@ -186,13 +189,13 @@ function moveOn() {
 function parseScore() {
   // set the "base score" of the human to their income: to do this we first remove the "$" and the ","
   // from the string annyang has given us
-  let baseScore = humanShell.income.replace(/\$|,/g, '');
+  let baseScore = user.income.replace(/\$|,/g, '');
   // then parse it into an integer
   baseScore = parseInt(baseScore, 10);
   // annoyingly, annyang interprets these numbers in written form for some reason so...
   // load it into a switch case, and run through it applying the appropirate number to a children variable
   let children;
-  switch (humanShell.children) {
+  switch (user.children) {
     case "no":
       children = 0;
       break;
@@ -226,10 +229,10 @@ function parseScore() {
   // reduce the base score by the number of children to a factor of 10
   baseScore -= (children * 10);
   // if the user lives in a rural area, give them a little bonus
-  if (humanShell.area === "rural") {
+  if (user.area === "rural") {
     baseScore += (baseScore / 5);
     // however if they live in a n urran area, take a bunch away
-  } else if (humanShell.area === "urban") {
+  } else if (user.area === "urban") {
     baseScore -= (baseScore / 10);
   }
   calculateClass(baseScore)
@@ -242,8 +245,8 @@ function parseScore() {
 function calculateClass(baseScore) {
   // if the user's score is less than 25000...
   if (baseScore < 25000) {
-    // create a new "filledHuman" out of the lower class, passing it the base paramenters of the human shell
-    filledHuman = new Lower(humanShell.age, humanShell.income, humanShell.area, humanShell.children, humanShell.aspiration);
+    // create a new "user" out of the lower class, passing it the base paramenters of the human shell
+    user = new Lower(user.name, user.age, user.income, user.area, user.children, user.aspiration);
     // change the state to prompt an interests base of questions
     currentState = "interests";
     // show a (likely) offensive image, and let them know they are not abad person. When done, fire the moveOn function
@@ -254,14 +257,14 @@ function calculateClass(baseScore) {
     // same as above different number, and a different class of human. Although (spoiler, alert) inside, all classes of humans
     // are the same.
   } else if (baseScore >= 25000 && baseScore < 95000) {
-    filledHuman = new Middle(humanShell.age, humanShell.income, humanShell.area, humanShell.children, humanShell.aspiration);
+    user = new Middle(user.name, user.age, user.income, user.area, user.children, user.aspiration);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?working,suburban" alt="clickbait" /> <p>Genuine raybans $25.</p>`);
     responsiveVoice.speak(`${stockResponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
   } else if (baseScore >= 95000) {
-    filledHuman = new Upper(humanShell.age, humanShell.income, humanShell.area, humanShell.children, humanShell.aspiration);
+    user = new Upper(user.name, user.age, user.income, user.area, user.children, humanShell.aspiration);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?rich,yaught" alt="clickbait" /> <p>This investment changed my life. But I dont tell just everyone about it...</p>`)
     responsiveVoice.speak(`your score is ${baseScore} you upper class ${stockResponse('negative')}`, voiceType, {
@@ -279,15 +282,15 @@ function calculateClass(baseScore) {
 // youTube API
 function parseInterests() {
   // iterate through the all of the interest keys contained in the object
-  for (let i = 0; i < Object.keys(filledHuman["interests"]).length; i++) {
-    let interest = Object.keys(filledHuman["interests"])[i];
+  for (let i = 0; i < Object.keys(user["interests"]).length; i++) {
+    let interest = Object.keys(user["interests"])[i];
     // add a space in between them, appending them all into a long string
-    searchTerms += " " + filledHuman["interests"][interest];
+    searchTerms += " " + user["interests"][interest];
   }
   // if the user is an instance of upper or middle class...
-  if (filledHuman instanceof Upper || filledHuman instanceof Middle) {
+  if (user instanceof Upper || user instanceof Middle) {
     // add their childhood aspiration to the list of interests
-    searchTerms += filledHuman.aspiration;
+    searchTerms += user.aspiration;
   }
   // now replace all of the spaces with an "or" opperator
   searchTerms = searchTerms.replace(/ /g, "|");
@@ -321,7 +324,7 @@ function getPerfectVideo(searchTerms) {
         // now pick a video id from the array with that number
         let randVidId = data["items"][randInt]["id"]["videoId"];
         // now execute the human's only function passing them their "algorithmically" chosen content
-        filledHuman.consumeContent(randVidId);
+        user.consumeContent(randVidId);
         // if no results are found, I'll be damned
       } else {
         console.log("I'll be damned... no results found");

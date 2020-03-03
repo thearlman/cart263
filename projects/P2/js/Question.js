@@ -22,5 +22,4 @@ class Question {
     commands[currentQuery] = currentResponse;
     annyang.addCommands(commands);
   }
-
 }
