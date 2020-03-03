@@ -196,7 +196,6 @@ function getPerfectVideo(searchTerms) {
     type: 'GET',
     url: 'https://www.googleapis.com/youtube/v3/search',
     data: {
-      // key: 'AIzaSyAU5Ai_CiUrJ-B0x9XrAmsK7HyNlm1CEbo',
       q: searchTerms,
       part: 'snippet',
       maxResults: 10,
