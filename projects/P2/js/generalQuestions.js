@@ -1,22 +1,10 @@
-// let generalQuestions = [
-//   {
-//     spoken: "What is your annual income?",
-//     written: `<img src="https://source.unsplash.com/400x400/?money,cash" alt="clickbait" />
-//     <p>What is your annual income?</p>
-//     <p>'Please Answer: I make __ dollars per year'</p>`
-//   }
-// ]
-//
-// let generalResponses = [
-//   {
-//     query: "I make *value per year",
-//     response: function(value) {
-//       let verify = `did you say you make ${value} per year?`;
-//       handleQuestion(humanShell, "income", value, generalQuestions, verify);
-//     }
-//   }
-// ]
 
+// Array of objects containing the "general" or base set of questions query the user with
+// {
+// spoken : "the text passed to responsiveVoice to speak",
+// written : "<the image passed to the question div>
+//              <the text to prompt the user>"
+// }
 let generalQuestions = [{
     spoken: "What is your name?",
     written: `<img src="https://source.unsplash.com/400x400/?handshake,name" alt="clickbait" />
@@ -54,6 +42,14 @@ let generalQuestions = [{
     <p>'Please Answer: When I grew up I wanted to be __'</p>`
   }
 ]
+
+// an array of objects containing command to send to annyang, and the verification
+// response to be used by responsive voice
+//  {
+//  query : "the text user must say *theValueObtained",
+//  response: function which scrapes value from annyang, and sends appropriate
+//            parameters to the question handling function
+//}
 
 let generalResponses = [{
     query: "my name is *value",

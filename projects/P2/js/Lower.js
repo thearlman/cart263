@@ -10,8 +10,8 @@ class Lower extends HumanShell {
   }
   consumeContent(interests){
     setInterval(function(){
-      alert(`${this.name}, ${annoyingAdThing[Math.floor(Math.random()*annoyingAdThing.length)]}`)
+      alert(this.name +`, ${annoyingAdThing[Math.floor(Math.random()*annoyingAdThing.length)]}`);
     }, 5000);
-    $("#question").html(`<iframe src="https://www.youtube.com/embed/${interests}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
+    $("#question").html(`<iframe id="video" src="https://www.youtube.com/embed/${interests}?autoplay=1" width="560" height="315" frameborder="0" allowfullscreen></iframe>`)
   }
 }

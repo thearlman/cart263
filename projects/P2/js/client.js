@@ -24,9 +24,7 @@ $(document).ready(function() {
 //the type of voice we will be using
 let voiceType = 'UK English Female';
 //the empty human, or rather at this stage, the idea of an empty human
-let humanShell;
 //same as above, but of the filled variety
-let filledHuman;
 let user;
 // what position we are in for the line of questioning
 let questionPos = 0;

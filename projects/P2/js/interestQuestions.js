@@ -1,3 +1,9 @@
+// Array of objects containing the more specific "interest" set of questions query the user with
+// {
+// spoken : "the text passed to responsiveVoice to speak",
+// written : "<the image passed to the question div>
+//              <the text to prompt the user>"
+// }
 let interestQuestions = [{
     spoken: "what is your favourite tv show?",
     written: `<img src="https://source.unsplash.com/400x400/?television,tv" alt="clickbait" />
@@ -54,7 +60,13 @@ let interestQuestions = [{
   },
 ]
 
-
+// an array of objects containing command to send to annyang, and the verification
+// response to be used by responsive voice
+//  {
+//  query : "the text user must say *theValueObtained",
+//  response: function which scrapes value from annyang, and sends appropriate
+//            parameters to the question handling function
+//}
 let interestResponses = [{
     query: "My favourite TV show is *value",
     response: function(value) {
