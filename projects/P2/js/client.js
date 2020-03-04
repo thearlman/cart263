@@ -282,7 +282,7 @@ function calculateClass(baseScore) {
     // same as above different number, and a different class of human. Although (spoiler, alert) inside, all classes of humans
     // are the same.
   } else if (baseScore >= 95000) {
-    user = new Upper(user.name, user.age, user.income, user.area, user.children, humanShell.aspiration);
+    user = new Upper(user.name, user.age, user.income, user.area, user.children, user.aspiration);
     currentState = "interests";
     $("#question").html(`<img src="https://source.unsplash.com/400x400/?rich,yaught" alt="clickbait" /> <p>This investment changed my life. But I dont tell just everyone about it...</p>`)
     responsiveVoice.speak(`your score is ${baseScore} you upper class ${stockResponse('negative')}`, voiceType, {
