@@ -1,10 +1,26 @@
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~If algorithmic influence is no laughing matter:
+// ~~~~~~~~~~~~~~why is clickbait so funny?
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//A game of sorts by: Asa Perlman
+
+//~~~~~~~In Brief:~~~~~~~~~
+//making use of the responsive voice API, and the annyang api, the user must
+//navigate through a series of sometimes-invasive-sometimes-boring questions
+//in search of the perfect content.
+//IAIINLMWICSF asks us to consider the extent to which we are willing to trade
+//our privacy, or our "digital identities", for ease of use, and entertainment.
+
+
 //tutorial on using youtube data API:
 //https://dev.to/aveb/making-your-first-get-request-to-youtube-search-api-4c2f
-
+//the unsplash "api":
+//https://unsplash.com/documentation
 
 //wait for document to finish loading
 $(document).ready(function() {
-  console.log("UPDATEDDDD");
+  console.log("Final update01");
   console.log("jquery activated");
   //set a callback to ask the user to repeat what they said if it doesn't match one of annyang's input commands
   annyang.addCallback('resultNoMatch', function(userSaid) {
@@ -31,10 +47,9 @@ let questionPos = 0;
 // variable to hold the current question
 let currentQuestion = ""
 // sketchy welcome message
-// let welcomeMessage = `Doctors will hate that you have found this trick.
-// I'm going to ask you some questions which will generate only the very best content for you.
-// Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
-let welcomeMessage = `Doctors`;
+let welcomeMessage = `Doctors will hate that you have found this trick.
+I'm going to ask you some questions which will generate only the very best content for you which will surely increase your stamina and health.
+Be warned that the government does not want you to know about this trick and you should only tell your closest of kin`;
 // the current query
 let currentQuery;
 //and is corresponing response
@@ -44,8 +59,7 @@ let currentState = "generalQuestions";
 // some stock positive responses for the bot to keep things a little more humaine
 let stockResponsesPositive = ["jolly good", "brilliant", "ace", "right then", "alright", "thanks mate", "nice one"];
 // and some begative ones as well
-let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss", ];
-let annoyingAdThing = ["don't wait to let your life begin", "listen to your gut", "50% off all bullshit"];
+let stockResponsesNegative = ["bollocks", "shit", "wanker", "rubbish", "your taking the piss"];
 //this will hold the search terms to be used at the end
 let searchTerms = "";
 
@@ -67,6 +81,10 @@ function stockResponse(sentiment) {
 //
 // we all start out as a shell
 function generateHumanShell() {
+  //set listner for annoying JS alert
+  $("#question").on("click", function() {
+    responsiveVoice.speak(currentQuestion);
+  });
   //create an instance of human
   user = new HumanShell();
   // activate annyang, prompting user to allow access to microphone
@@ -261,6 +279,8 @@ function calculateClass(baseScore) {
     responsiveVoice.speak(`${stockResponse('positive')}, your score is ${baseScore} you are middle class. Keep it up.`, voiceType, {
       onend: moveOn
     });
+    // same as above different number, and a different class of human. Although (spoiler, alert) inside, all classes of humans
+    // are the same.
   } else if (baseScore >= 95000) {
     user = new Upper(user.name, user.age, user.income, user.area, user.children, humanShell.aspiration);
     currentState = "interests";
@@ -292,6 +312,7 @@ function parseInterests() {
   }
   // now replace all of the spaces with an "or" opperator
   searchTerms = searchTerms.replace(/ /g, "|");
+  console.log(searchTerms);
   // run the youtube api with this function
   getPerfectVideo(searchTerms);
 }
@@ -315,7 +336,7 @@ function getPerfectVideo(searchTerms) {
     },
     // on a successfull callback...
     success: function(data) {
-    // check to make sure there are results, and not an empty array
+      // check to make sure there are results, and not an empty array
       if (data["items"].length > 0) {
         // pick a random number which is no greater than the number of results found
         let randInt = Math.floor(Math.random() * data["items"].length);

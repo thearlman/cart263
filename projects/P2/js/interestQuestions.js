@@ -66,7 +66,7 @@ let interestQuestions = [{
 //  query : "the text user must say *theValueObtained",
 //  response: function which scrapes value from annyang, and sends appropriate
 //            parameters to the question handling function
-//}
+// }
 let interestResponses = [{
     query: "My favourite TV show is *value",
     response: function(value) {

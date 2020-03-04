@@ -49,7 +49,7 @@ let generalQuestions = [{
 //  query : "the text user must say *theValueObtained",
 //  response: function which scrapes value from annyang, and sends appropriate
 //            parameters to the question handling function
-//}
+// }
 
 let generalResponses = [{
     query: "my name is *value",
