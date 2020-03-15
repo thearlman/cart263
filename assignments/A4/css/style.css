@@ -3,3 +3,19 @@ body {
   padding: 255;
   box-sizing: border-box;
 }
+#phraseWrapper{
+  display: flex;
+  padding: 2vh;
+  border: solid 1px green;
+  justify-content: space-around;
+  min-width: 50vh;
+  max-width: 70vh;
+  height: 10vh;
+}
+.word{
+  border: solid 1px red;
+  min-width: 16.66%;
+  min-width: min-content;
+  height: min-content;
+  padding: 2vh
+}
