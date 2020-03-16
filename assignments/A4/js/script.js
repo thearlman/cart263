@@ -31,6 +31,10 @@ $(document).ready(function() {
 //
 //selects words from the json file, and handles the tenses and such
 function dataPicker() {
+  //pick a random country from the countries array
+  let randomCountry = getRandomElement(jsonData.countries);
+  //add a prefix to it
+  randomCountry = `In ${randomCountry},`
   //pick a random word from the condiments array
   let randomCondiment = getRandomElement(jsonData.condiments);
   // set the verb to a default value
@@ -56,8 +60,12 @@ function dataPicker() {
   if (a2Check === "a" || a2Check === "e" || a2Check === "i" || a2Check === "o" || a2Check === "u") {
     article2 = "in an";
   }
+  //pick a random movie from the movies array
+  let randomMovie = getRandomElement(jsonData.movies);
+  //add a prefix to it
+  randomMovie = `watching ${randomMovie}`;
   //spin the slot machine passing it all of the content we have just picked
-  spinSlotMachine(randomCondiment, verb, article1, randomCat, article2, randomRoom)
+  spinSlotMachine(randomCountry, randomCondiment, verb, article1, randomCat, article2, randomRoom, randomMovie)
 }
 
 
@@ -65,14 +73,16 @@ function dataPicker() {
 //
 //intermediate function to trigger the fake random spinning of the slot machine cells,
 //picks a random number of options to spin through
-function spinSlotMachine(randomCondiment, verb, article1, randomCat, article2, randomRoom) {
+function spinSlotMachine(randomCountry, randomCondiment, verb, article1, randomCat, article2, randomRoom, randomMovie) {
   let spinLength = Math.floor(Math.random() * 20);
+  spinCell($("#country"), jsonData.countries, randomCountry, spinLength);
   spinCell($("#condiment"), jsonData.condiments, randomCondiment, spinLength);
   spinCell($("#verb"), jsonData.verbs, verb, spinLength);
   spinCell($("#article1"), jsonData.verbs, article1, spinLength);
   spinCell($("#cat"), jsonData.cats, randomCat, spinLength);
   spinCell($("#article2"), jsonData.verbs, article2, spinLength);
   spinCell($("#room"), jsonData.rooms, randomRoom, spinLength);
+  spinCell($("#movie"), jsonData.movies, randomMovie, spinLength);
 }
 
 //~~~~~spinCell()
