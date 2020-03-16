@@ -46,7 +46,7 @@ function dataPicker() {
   //check what letter the random cat begins with
   let a1Check = randomCat.charAt(0);
   //if it is a vowel, switch it over
-  if (a1Check === "A" || a1Check === "E" || a1Check === "I" || a1Check === "O" || aiCheck === "U") {
+  if (a1Check === "A" || a1Check === "E" || a1Check === "I" || a1Check === "O" || a1Check === "U") {
     article1 = "like an";
   }
   //same as above, but for last pair of noun and article
